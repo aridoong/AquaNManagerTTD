@@ -121,12 +121,12 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 *
 		 * 여기서부터 스트리밍 관련 Field Test 를 진행합니다. case number : 1, 2, 3, 7, 8, 9, 14, 17, 18
 		 */
-		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player1.asp", 1);
-		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player2.asp", 2);
-		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player3.asp", 3);
-		 testFieldTestSmi("http://" + serverIp + "/media/auto/player6.asp", 6);
-		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player7.asp", 7);
-//		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player8.asp", 8);
+//		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player1.asp", 1);
+//		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player2.asp", 2);
+//		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player3.asp", 3);
+//		 testFieldTestSmi("http://" + serverIp + "/media/auto/player6.asp", 6);
+//		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player7.asp", 7);
+		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player8.asp", 8);
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player9.asp", 9);
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player14.asp", 14);
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player17.asp", 17);
