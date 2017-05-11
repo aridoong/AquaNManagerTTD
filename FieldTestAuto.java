@@ -174,17 +174,18 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 
 		 * 여기서부터 >>, <<, || 아이콘 관련 Test 를 진행합니다. case number : 없음 ( iconClick )
 		 */
+		
 		//testIconClick("http://" + serverIp + "/media/auto/player5.asp", "iconClick");
 		
 		//현재 불가 testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
-		testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
+		//testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
 		//현재 불가 testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);		
-		testclosebutton("http://" + serverIp + "/media/auto/player15.asp", 52);
-		testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
-		testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
-		testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
-		testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);;
-		testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
+		//testclosebutton("http://" + serverIp + "/media/auto/player15.asp", 52);
+		//현재 불가 testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
+		//현재 불가 testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
+		//testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
+		//testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
+		//testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
 		
 		//잠깐 플레이리스트 관련 Test 를 진행합니다.
 		//testPlaylist("playlist");
@@ -1155,7 +1156,6 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//아니면 입력칸에다가 내가 직접 코드 상으로 재생목록의 이름 "!@34한국어eng" 을 넣을 수 있을까?
 		
 		solo.sleep(2000);
-		
 	}
 	
 		public void testwatermarkText(String uri, int caseNumber) {
@@ -1373,7 +1373,20 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(3000);
 			}
 
-		}	
+		}
+		
+		public void replayStreamingContent(String url, int caseNum){
+		//스트리밍 재생하는 콘텐츠 
+			solo = new Solo(getInstrumentation(), getActivity());
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Context instrumentationContext = getInstrumentation().getContext();
+			log("Field Test case " + caseNum + " reopened");
+			instrumentationContext.startActivity(browserIntent);
+			solo.assertCurrentActivity("message", AquaWebPlayer.class);
+
+			solo.sleep(2000);
+		}		
 
 		public void testStreamingContentsNoReplay(String uri, int caseNumber) {
 		//스트리밍 콘텐츠는 이어보기가 되지 않는지 확인하는 케이스.  
@@ -1403,21 +1416,43 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					e.printStackTrace();
 				}
 			}
-			//함수 실행 종료 후 다시 자기자신을 불러서 한번 더 스트리밍 콘텐츠를 실행. 
-			testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
-			//이후 바로 찍어서 스크린샷을 통해 해당 영상은 0초부 시작함을 확인할 수 있음.
+			
+			//함수 실행 종료 후 동일 컨텐 한번 더 스트리밍 실행
+			replayStreamingContent("http://" + serverIp + "/media/auto/player2.asp", 56);
 			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 			solo.sleep(4000);
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 26 스트리밍 콘텐츠 정상재생 확인.");
+				log("case 26 스트리밍 콘텐츠를 다시 실행하면 이어보기 안되는지 확인.");
 				solo.sleep(3000);
-			}
-		}			
+			}			
+		}
 		
 		public void testDownloadProgressBar(String uri, int caseNumber) {
-		//다운로드할 때 게이지바나 파일명 등이 정확하게 나오는지 확인.
+		//다운로드할 때 게이지바나 파일명 등이 정확하게 나오는지 확인.			
+			solo = new Solo(getInstrumentation(), getActivity());
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Context instrumentationContext = getInstrumentation().getContext();
+			log("Field Test case " + caseNumber + " opened");
+			instrumentationContext.startActivity(browserIntent);
+			
+			if (solo.waitForText("확인")) {
+				solo.clickOnText("확인");
+				log("case 27 다운로드 할 때 프로그레스 바 정상적으로 올라가는가 확인.");
+				solo.sleep(4000);
+				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+				
+				if (solo.waitForText("예")) {
+					solo.clickOnText("예");
+					solo.sleep(2000);
+				}	
+			}			
+		}		
+		
+		public void testVideoContentNameSorting(String uri, int caseNumber) {
+		//비디오탭 강의명정렬 기능. 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1426,16 +1461,51 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			instrumentationContext.startActivity(browserIntent);
 			solo.assertCurrentActivity("message", AquaWebPlayer.class);
 
-			solo.sleep(10000);
+			final ImageButton edit_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.CDN_TEST_POPUP);
+			if (edit_bt != null) {
+				try {
+					runTestOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							edit_bt.callOnClick();
+							log("case 28 비디오탭 목록에서 편집 버튼 클릭");
+							solo.sleep(3000);
+						}
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}	
+			solo.sleep(1000);
+			final ImageButton sorting_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.btn_close);
+			if (sorting_bt != null) {
+				try {
+					runTestOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							sorting_bt.callOnClick();
+							log("case 28 사용자가 콘텐츠를 정렬할 때");
+							solo.sleep(3000);
+						}
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			solo.sleep(5000);
 			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
-			solo.sleep(4000);
+			solo.sleep(3000);
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 27 다운로드 할 때 프로그레스 바 정상적으로 올라가는가 확인.");
+				log("case 24 팝업플레이 X버튼으로 종료하기");
 				solo.sleep(3000);
 			}
-		}			
+		}				
 		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();	
