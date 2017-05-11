@@ -176,14 +176,15 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 */
 		//testIconClick("http://" + serverIp + "/media/auto/player5.asp", "iconClick");
 		
-		//testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
+		//현재 불가 testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
 		testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
-		//testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);		
+		//현재 불가 testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);		
 		testclosebutton("http://" + serverIp + "/media/auto/player15.asp", 52);
 		testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
 		testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
 		testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
-		testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 56);
+		testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);;
+		testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
 		
 		//잠깐 플레이리스트 관련 Test 를 진행합니다.
 		//testPlaylist("playlist");
@@ -197,7 +198,6 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		log("backey send");
 		solo.sleep(5000);
 		exitApp();
-
 	}
 
 	public void testFieldTestStreaming(String uri, int caseNumber) {
@@ -1352,8 +1352,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 
 		}		
-
-		
+	
 		public void testStreamingContentsPlay(String uri, int caseNumber) {
 		//스트리밍 콘텐츠 정상 재생확인하기 
 			solo = new Solo(getInstrumentation(), getActivity());
@@ -1374,8 +1373,49 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(3000);
 			}
 
-		}			
+		}	
 
+		public void testStreamingContentsNoReplay(String uri, int caseNumber) {
+		//스트리밍 콘텐츠는 이어보기가 되지 않는지 확인하는 케이스.  
+			solo = new Solo(getInstrumentation(), getActivity());
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Context instrumentationContext = getInstrumentation().getContext();
+			log("Field Test case " + caseNumber + " opened");
+			instrumentationContext.startActivity(browserIntent);
+			solo.assertCurrentActivity("message", AquaWebPlayer.class);
+
+			solo.sleep(2000);
+			
+			final IconTextView close_bt = (IconTextView) solo.getView(com.cdn.aquanmanager.R.id.CDN_TEST_BTN_CLOSE);
+			if (close_bt != null) {
+				try {
+					runTestOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							log("case 26 스트리밍 콘텐츠 종료 버튼 클릭");
+							close_bt.callOnClick();
+							solo.sleep(3000);
+						}
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			//함수 실행 종료 후 다시 자기자신을 불러서 한번 더 스트리밍 콘텐츠를 실행. 
+			testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
+			//이후 바로 찍어서 스크린샷을 통해 해당 영상은 0초부 시작함을 확인할 수 있음.
+			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+			solo.sleep(4000);
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+				final Button button_ok = (Button) solo.getView(android.R.id.button1);
+				button_ok.callOnClick();
+				log("case 26 스트리밍 콘텐츠 정상재생 확인.");
+				solo.sleep(3000);
+			}
+		}			
+		
 		public void testDownloadProgressBar(String uri, int caseNumber) {
 		//다운로드할 때 게이지바나 파일명 등이 정확하게 나오는지 확인.
 			solo = new Solo(getInstrumentation(), getActivity());
@@ -1395,12 +1435,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				log("case 27 다운로드 할 때 프로그레스 바 정상적으로 올라가는가 확인.");
 				solo.sleep(3000);
 			}
-
 		}			
 		
 	public void main(String[] args) throws Exception {
-		testPlayerTest_1();
-		
+		testPlayerTest_1();	
 	}
-
 }
