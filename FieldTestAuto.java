@@ -115,7 +115,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 
 		 * 여기서부터 플레이리스트 관련 Field Test 를 진행합니다. case number : 15,
 		 */
-		testFieldTestPlayList("http://" + serverIp + "/media/auto/player15.asp", 15);
+		//testFieldTestPlayList("http://" + serverIp + "/media/auto/player15.asp", 15);
 		
 		/*
 		 *
@@ -156,13 +156,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 
 		 * 여기서부터 상세보기 및 content 재생 시 UI 및 메뉴 확인 관련 Test 를 진행합니다. case number : 없음
 		 */		
-		testContentInfoAndUI("videoContent");
+		//testContentInfoAndUI("videoContent");
 		
 		/*
 		 * 
 		 * 여기서부터 북마크 관련 Test 를 진행합니다. case number : 없음 ( bookmark )
 		 */
-		testBookmarks("bookmark");
+		//testBookmarks("bookmark");
 		
 		/*
 		 * 
@@ -186,7 +186,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
 		//testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
 		//testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
-		testVideoContentNameSorting(57);
+		testVideoUserNameSorting(58);
+		testVideoContentNameSorting(59);
+		testVideoFolderUserSorting(60);
+		testVideoFolderNameSorting(61);
 		
 		//잠깐 플레이리스트 관련 Test 를 진행합니다.
 		//testPlaylist("playlist");
@@ -259,7 +262,6 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			log("case 15 플레이리스트 off 클릭 시도");
 			solo.sleep(3000);
 		}
-
 	}
 	
 //	public void testFieldTestSpeed(String uri, String caseNumber) {
@@ -1451,33 +1453,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}	
 			}			
 		}		
-		
-		public void testVideoContentNameSorting(int caseNumber) {
-		//비디오탭 강의명정렬 기능. 
+
+		public void testVideoUserNameSorting(int caseNumber) {
+		//비디오탭 사용자정렬 기능. 
 			
 			//먼저 video tab을 진입한다.
-			solo.sleep(5000);
+			solo.sleep(2000);
 			solo.waitForActivity("AquaContent", 5000);
 			log("case 28 AquaContent wait end");
-			solo.sleep(5000);
-			// 그다음 해당 영상이 있는 가장 깊은 depth를 찾아서 간다.
-			solo.waitForView(com.cdn.aquanmanager.R.id.list);
-			final ImageButton videoTab_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.list);
-			try {
-				runTestOnUiThread(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						log("case 28 videolistTab button click");
-						videoTab_bt.callOnClick();
-						log("case 28 case notyet videotab opened");
-					}
-					
-				});
-			} catch(Throwable e) {
-				e.printStackTrace();
-			}
 			
 			solo.sleep(3000);
 			if(solo.waitForText("jihyetest")) {
@@ -1509,31 +1492,157 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 			
 			//강의명 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("사용자 정렬")) {
+				solo.clickOnText("사용자 정렬");
+				log("case 28 사용자 정렬된 영상들의 모습을 확인.");
+				solo.sleep(500);
+				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+			}
+		}				
+		
+		public void testVideoContentNameSorting(int caseNumber) {
+		//비디오탭 강의명정렬 기능. 
+			
+			//먼저 video tab을 진입한다.
+			solo.sleep(1000);
+			solo.waitForActivity("AquaContent", 1000);
+			log("case 29 AquaContent wait end");
+			
+			solo.sleep(500);
+			if(solo.waitForText("jihyetest")) {
+				solo.clickOnText("jihyetest");
+				solo.sleep(2000);
+			}
+			if(solo.waitForText("crs2")) {
+				solo.clickOnText("crs2");
+				solo.sleep(2000);
+			}
+			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 29 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 29 edit 버튼을 클릭.");
+								solo.sleep(500);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//강의명 정렬 라디오버튼을 클릭하는 구문. 
 			if(solo.waitForText("강의명 정렬")) {
 				solo.clickOnText("강의명 정렬");
-				log("case 28 강의명정렬된 영상들의 모습을 확인.");
+				log("case 29 강의명정렬된 영상들의 모습을 확인.");
+				solo.sleep(2000);
+				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+				solo.sleep(1000);
+			}
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+          }
+		}	
+		
+		public void testVideoFolderUserSorting(int caseNumber) {
+		//비디오탭 폴더 사용자정렬 기능. 
+			
+			//먼저 video tab을 진입한다.
+			solo.sleep(2000);
+			solo.waitForActivity("AquaContent", 5000);
+			log("case 28 AquaContent wait end");
+			
+			solo.sleep(3000);
+			if(solo.waitForText("jihyetest")) {
+				solo.clickOnText("jihyetest");
+				solo.sleep(2000);
+			}
+			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 30 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 30 edit 버튼을 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//사용자 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("사용자 정렬")) {
+				solo.clickOnText("사용자 정렬");
+				log("case 30 사용자 정렬된 영상들의 모습을 확인.");
 				solo.sleep(4000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				solo.sleep(1000);
 			}
-//			final Button lecture_sort_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.lecture_sort);
-//			if (lecture_sort_bt != null) {	
-//				log("edit 버튼을 찾음.");
-//				try {
-//					runTestOnUiThread(new Runnable() {
-//						
-//						@Override
-//						public void run() {
-//							// TODO Auto-generated method stub
-//							lecture_sort_bt.callOnClick();
-//							log("강의명정렬 버튼을 클릭.");
-//							solo.sleep(2000);
-//						}		
-//					});
-//				} catch (Throwable e) {
-//					e.printStackTrace();
-//				}
-//			}
+		}		
+
+		public void testVideoFolderNameSorting(int caseNumber) {
+		//비디오탭 폴더 폴더정렬 기능. 
+			
+			//먼저 video tab을 진입한다.
+			solo.sleep(2000);
+			solo.waitForActivity("AquaContent", 2000);
+			log("case 31 AquaContent wait end");
+			
+			solo.sleep(1000);
+			if(solo.waitForText("jihyetest")) {
+				solo.clickOnText("jihyetest");
+				solo.sleep(2000);
+			}
+			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 31 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 31 edit 버튼을 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//강의명 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("강의명 정렬")) {
+				solo.clickOnText("강의명 정렬");
+				log("case 31 강의명 정렬된 영상들의 모습을 확인.");
+				solo.sleep(4000);
+				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+				solo.sleep(1000);
+			}
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}			
 		}				
 		
 	public void main(String[] args) throws Exception {
