@@ -174,7 +174,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 
 		 * 여기서부터 >>, <<, || 아이콘 관련 Test 를 진행합니다. case number : 없음 ( iconClick )
 		 */
-//		testIconClick("http://" + serverIp + "/media/auto/player5.asp", "iconClick");
+		//testIconClick("http://" + serverIp + "/media/auto/player5.asp", "iconClick");
 		
 		//testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
 		testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
@@ -183,6 +183,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
 		testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
 		testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
+		testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 56);
 		
 		//잠깐 플레이리스트 관련 Test 를 진행합니다.
 		//testPlaylist("playlist");
@@ -1370,6 +1371,28 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
 				log("case 25 스트리밍 콘텐츠 정상재생 확인.");
+				solo.sleep(3000);
+			}
+
+		}			
+
+		public void testDownloadProgressBar(String uri, int caseNumber) {
+		//다운로드할 때 게이지바나 파일명 등이 정확하게 나오는지 확인.
+			solo = new Solo(getInstrumentation(), getActivity());
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Context instrumentationContext = getInstrumentation().getContext();
+			log("Field Test case " + caseNumber + " opened");
+			instrumentationContext.startActivity(browserIntent);
+			solo.assertCurrentActivity("message", AquaWebPlayer.class);
+
+			solo.sleep(10000);
+			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+			solo.sleep(4000);
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+				final Button button_ok = (Button) solo.getView(android.R.id.button1);
+				button_ok.callOnClick();
+				log("case 27 다운로드 할 때 프로그레스 바 정상적으로 올라가는가 확인.");
 				solo.sleep(3000);
 			}
 
