@@ -11,6 +11,7 @@ import com.cdn.aquanmanager.AquaLauncher;
 import com.cdn.aquanmanager.R.xml;
 import com.cdn.aquanmanager.control.ContentView;
 import com.cdn.aquaplayer.player.AquaWebPlayer;
+import com.cdn.player.activity.AquaPlaylist;
 import com.newin.common.widget.IconTextView;
 import com.newin.nplayer.data.SettingManager;
 import com.robotium.solo.Solo;
@@ -113,13 +114,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		
 		/*
 		 * 
-		 * ì—¬ê¸°ì„œë¶€í„° í”Œë ˆì´ë¦¬ìŠ¤íŠ¸ ê´€ë ¨ Field Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : 15,
+		 * ¿©±â¼­ºÎÅÍ ÇÃ·¹ÀÌ¸®½ºÆ® °ü·Ã Field Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : 15,
 		 */
 		//testFieldTestPlayList("http://" + serverIp + "/media/auto/player15.asp", 15);
 		
 		/*
 		 *
-		 * ì—¬ê¸°ì„œë¶€í„° ìŠ¤íŠ¸ë¦¬ë° ê´€ë ¨ Field Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : 1, 2, 3, 7, 8, 9, 14, 17, 18
+		 * ¿©±â¼­ºÎÅÍ ½ºÆ®¸®¹Ö °ü·Ã Field Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : 1, 2, 3, 7, 8, 9, 14, 17, 18
 		 */
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player1.asp", 1);
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player2.asp", 2);
@@ -132,14 +133,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player17.asp", 17);
 //		 testFieldTestStreaming("http://" + serverIp + "/media/auto/player18.asp", 18);
 //		
-//		//ìž ì‹œ ë°°ì† ê´€ë ¨ Field Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : ì—†ìŒ
+//		//Àá½Ã ¹è¼Ó °ü·Ã Field Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : ¾øÀ½
 ////		testFieldTestSpeed("http://" + serverIp + "/media/auto/player_speed.asp", "13_1");
 //
 //		/*
 //		 * 
-//		 * ì—¬ê¸°ì„œë¶€í„° ë¶ë§ˆí¬ ê´€ë ¨ Field Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : 5
+//		 * ¿©±â¼­ºÎÅÍ ºÏ¸¶Å© °ü·Ã Field Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : 5
 //		 *
-//		 *ë” ì¢‹ì€ í†µí•© ë¶ë§ˆí¬ ê´€ë ¨ Testê°€ ìƒê²¼ìœ¼ë¯€ë¡œ, ì´ í•¨ìˆ˜ëŠ” ì£¼ì„ ì²˜ë¦¬í•´ë„ ë˜ê² ë‹¤.
+//		 *´õ ÁÁÀº ÅëÇÕ ºÏ¸¶Å© °ü·Ã Test°¡ »ý°åÀ¸¹Ç·Î, ÀÌ ÇÔ¼ö´Â ÁÖ¼® Ã³¸®ÇØµµ µÇ°Ú´Ù.
 //		 */
 ////		testFieldTestBookmark("http://" + serverIp + "/media/auto/player5.asp", 5);
 //
@@ -148,41 +149,44 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		
 		/*
 		 * 
-		 * ì—¬ê¸°ì„œë¶€í„° ë‹¤ìš´ë¡œë“œ ê´€ë ¨ Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : ì—†ìŒ 
+		 * ¿©±â¼­ºÎÅÍ ´Ù¿î·Îµå °ü·Ã Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : ¾øÀ½ 
 		 */
 //		testDownload("http://" + serverIp + "/media/auto/down1.asp", "download");	
 		
 		/*
 		 * 
-		 * ì—¬ê¸°ì„œë¶€í„° ìƒì„¸ë³´ê¸° ë° content ìž¬ìƒ ì‹œ UI ë° ë©”ë‰´ í™•ì¸ ê´€ë ¨ Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : ì—†ìŒ
+		 * ¿©±â¼­ºÎÅÍ »ó¼¼º¸±â ¹× content Àç»ý ½Ã UI ¹× ¸Þ´º È®ÀÎ °ü·Ã Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : ¾øÀ½
 		 */		
 		//testContentInfoAndUI("videoContent");
 		
 		/*
 		 * 
-		 * ì—¬ê¸°ì„œë¶€í„° ë¶ë§ˆí¬ ê´€ë ¨ Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : ì—†ìŒ ( bookmark )
+		 * ¿©±â¼­ºÎÅÍ ºÏ¸¶Å© °ü·Ã Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : ¾øÀ½ ( bookmark )
 		 */
 		//testBookmarks("bookmark");
 		
 		/*
 		 * 
-		 * ì—¬ê¸°ì„œë¶€í„° ìž ê¸ˆ ìƒíƒœ ê´€ë ¨ Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : ì—†ìŒ ( lock ) 
+		 * ¿©±â¼­ºÎÅÍ Àá±Ý »óÅÂ °ü·Ã Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : ¾øÀ½ ( lock ) 
 		 */
 //		testLock("http://" + serverIp + "/media/auto/player5.asp", "lock");
 		
 		/*
 		 * 
-		 * ì—¬ê¸°ì„œë¶€í„° >>, <<, || ì•„ì´ì½˜ ê´€ë ¨ Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤. case number : ì—†ìŒ ( iconClick )
-		 */
-		
+		 * ¿©±â¼­ºÎÅÍ >>, <<, || ¾ÆÀÌÄÜ °ü·Ã Test ¸¦ ÁøÇàÇÕ´Ï´Ù. case number : ¾øÀ½ ( iconClick )
+		 */		
 		//testIconClick("http://" + serverIp + "/media/auto/player5.asp", "iconClick");
 		
-		//í˜„ìž¬ ë¶ˆê°€ testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
+
+		//Àá±ñ ÇÃ·¹ÀÌ¸®½ºÆ® °ü·Ã Test ¸¦ ÁøÇàÇÕ´Ï´Ù.
+		//testPlaylist("playlist");
+		
+		//ÇöÀç ºÒ°¡ testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
 		//testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
-		//í˜„ìž¬ ë¶ˆê°€ testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);		
+		//ÇöÀç ºÒ°¡ testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);		
 		//testclosebutton("http://" + serverIp + "/media/auto/player15.asp", 52);
-		//í˜„ìž¬ ë¶ˆê°€ testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
-		//í˜„ìž¬ ë¶ˆê°€ testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
+		//ÇöÀç ºÒ°¡ testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
+		//ÇöÀç ºÒ°¡ testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
 		//testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
 		//testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
 		//testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
@@ -190,9 +194,6 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		testVideoContentNameSorting(59);
 		testVideoFolderUserSorting(60);
 		testVideoFolderNameSorting(61);
-		
-		//ìž ê¹ í”Œë ˆì´ë¦¬ìŠ¤íŠ¸ ê´€ë ¨ Test ë¥¼ ì§„í–‰í•©ë‹ˆë‹¤.
-		//testPlaylist("playlist");
 
 		solo.waitForActivity("AquaContent", 5000);
 		log("AquaContent wait End");
@@ -245,7 +246,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						log("case 15 í”Œë ˆì´ë¦¬ìŠ¤íŠ¸ í…ìŠ¤íŠ¸ë·° í´ë¦­");
+						log("case 15 ÇÃ·¹ÀÌ¸®½ºÆ® ÅØ½ºÆ®ºä Å¬¸¯");
 						playlist_tv.callOnClick();
 						solo.sleep(3000);
 					}
@@ -259,7 +260,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 			final Button button_ok = (Button) solo.getView(android.R.id.button1);
 			button_ok.callOnClick();
-			log("case 15 í”Œë ˆì´ë¦¬ìŠ¤íŠ¸ off í´ë¦­ ì‹œë„");
+			log("case 15 ÇÃ·¹ÀÌ¸®½ºÆ® off Å¬¸¯ ½Ãµµ");
 			solo.sleep(3000);
 		}
 	}
@@ -283,7 +284,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //					public void run() {
 //						// TODO Auto-generated method stub
 //						solo.sleep(6000);
-//						log("case 13_1 ë°°ì† ë²„íŠ¼ í´ë¦­ ì‹œë„");
+//						log("case 13_1 ¹è¼Ó ¹öÆ° Å¬¸¯ ½Ãµµ");
 //						log("case 13 speed_plus? : " + speed_plus);
 //						speed_plus.callOnClick();
 //						speed_plus.callOnClick();
@@ -303,12 +304,12 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //			}
 //		}
 //		
-//		solo.sleep(60000);	//1 ë¶„
+//		solo.sleep(60000);	//1 ºÐ
 //		solo.takeScreenshot("Field+Test+case13_1" + "+" + testDate);
 //		
-//		//ë°°ì† ë²„íŠ¼ì„ í´ë¦­í•˜ì—¬ 2.0 x ë¡œ ë§Œë“  ë‹¤ìŒì—,
-//		//10 ë¶„ ëŒë ¤ì„œ ( sleep() )
-//		//ìº¡ì²˜í•´ë³¸ë‹¤.
+//		//¹è¼Ó ¹öÆ°À» Å¬¸¯ÇÏ¿© 2.0 x ·Î ¸¸µç ´ÙÀ½¿¡,
+//		//10 ºÐ µ¹·Á¼­ ( sleep() )
+//		//Ä¸Ã³ÇØº»´Ù.
 //	}
 
 	public void testFieldTestBookmark(String uri, int caseNumber) {
@@ -328,7 +329,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						log("case 5 ë¶ë§ˆí¬ ë²„íŠ¼ í´ë¦­");
+						log("case 5 ºÏ¸¶Å© ¹öÆ° Å¬¸¯");
 						bookmark_bt.callOnClick();
 						solo.sleep(5000);
 					}
@@ -346,7 +347,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					public void run() {
 						// TODO Auto-generated method stub
 						solo.takeScreenshot("Field+Test+case5_1" + "+" + testDate);
-						log("case 5 ë¶ë§ˆí¬ ë¦¬ìŠ¤íŠ¸ë·° ì°¾ìŒ");
+						log("case 5 ºÏ¸¶Å© ¸®½ºÆ®ºä Ã£À½");
 						
 //						final TextView bookmark_mv = (TextView) solo.getView(com.cdn.aquanmanager.R.id.tv_bookmark1);
 //						if (bookmark_mv != null) {
@@ -356,7 +357,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //									@Override
 //									public void run() {
 //										// TODO Auto-generated method stub
-//										log("case 5 ë¶ë§ˆí¬ êµ¬ê°„ ì´ë™");
+//										log("case 5 ºÏ¸¶Å© ±¸°£ ÀÌµ¿");
 //										bookmark_mv.callOnClick();
 //										solo.takeScreenshot("Field+Test+case5_2" + "+" + testDate);
 //									}
@@ -377,7 +378,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}   
 
 		final View bookmark_row = bookmark_lv.getChildAt(0);
-		final TextView bookmark_mv = (TextView) bookmark_row.findViewById(com.cdn.aquanmanager.R.id.tv_bookmark1); //bookmark_mv : ë¶ë§ˆí¬ ì´ë™ 
+		final TextView bookmark_mv = (TextView) bookmark_row.findViewById(com.cdn.aquanmanager.R.id.tv_bookmark1); //bookmark_mv : ºÏ¸¶Å© ÀÌµ¿ 
 //		if (bookmark_row != null) {
 //			try {
 //				runTestOnUiThread(new Runnable() {
@@ -385,8 +386,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //					@Override
 //					public void run() {
 //						// TODO Auto-generated method stub
-//						log("case 5 ë¶ë§ˆí¬ êµ¬ê°„ ì´ë™");
-//						log("case 5 ë¶ë§ˆí¬ êµ¬ê°„ ì´ë¦„ : " + bookmark_row.toString());
+//						log("case 5 ºÏ¸¶Å© ±¸°£ ÀÌµ¿");
+//						log("case 5 ºÏ¸¶Å© ±¸°£ ÀÌ¸§ : " + bookmark_row.toString());
 //						solo.clickOnView(bookmark_row);
 //						bookmark_row.performClick();
 //						bookmark_row.callOnClick();
@@ -404,7 +405,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					log("case 5 ë¶ë§ˆí¬ êµ¬ê°„ ì´ë™");
+					log("case 5 ºÏ¸¶Å© ±¸°£ ÀÌµ¿");
 					bookmark_mv.callOnClick();
 					solo.sleep(6000);
 //					solo.takeScreenshot("Field+Test+case5_2" + "+" + testDate);
@@ -424,7 +425,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //					@Override
 //					public void run() {
 //						// TODO Auto-generated method stub
-//						log("case 5 ë¶ë§ˆí¬ êµ¬ê°„ ì´ë™");
+//						log("case 5 ºÏ¸¶Å© ±¸°£ ÀÌµ¿");
 //						bookmark_mv.callOnClick();
 //						solo.takeScreenshot("Field+Test+case5_2" + "+" + testDate);
 //					}
@@ -445,7 +446,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		log("Field Test case " + caseNumber + " opened");
 		instrumentationContext.startActivity(browserIntent);
 		solo.sleep(5000);
-		solo.takeScreenshot("Field+Test+case+" + caseNumber + "+" + testDate);	//Mb ë‚˜ íŒŒì¼ëª… ë“±ì˜ í…ìŠ¤íŠ¸ê°€ ìž˜ë¦¼ì—†ì´ í‘œì‹œë˜ëŠ”ì§€ í™•ì¸
+		solo.takeScreenshot("Field+Test+case+" + caseNumber + "+" + testDate);	//Mb ³ª ÆÄÀÏ¸í µîÀÇ ÅØ½ºÆ®°¡ Àß¸²¾øÀÌ Ç¥½ÃµÇ´ÂÁö È®ÀÎ
 		solo.waitForView(com.cdn.aquanmanager.R.id.content_list);
 		
 		final ImageButton downstop_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.download);
@@ -456,7 +457,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						log("case ë‹¤ìš´ë¡œë“œ ì¼ì‹œì •ì§€ ë²„íŠ¼ í´ë¦­ ì‹œë„");
+						log("case ´Ù¿î·Îµå ÀÏ½ÃÁ¤Áö ¹öÆ° Å¬¸¯ ½Ãµµ");
 						solo.clickOnView(downstop_bt);
 						solo.sleep(5000);
 					}
@@ -514,8 +515,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		if(solo.waitForText("Case1")) {
 			solo.clickOnText("Case1");
 			solo.sleep(3000);
-			solo.takeScreenshot("Field+Test+case+contentInfo_1+" + testDate);	//íŒŒì¼ ì •ë³´ í…ìŠ¤íŠ¸ê°€ ìž˜ë¦¼ì—†ì´ í‘œì‹œë˜ëŠ”ì§€ í™•ì¸
-			//ì´ì „ í•¨ìˆ˜ì—ì„œ ë§‰ ë‹¤ìš´ë°›ì€ content ì´ë¯€ë¡œ, ìº¡ì²˜ íŒŒì¼ì—ëŠ” ìž¬ìƒì •ë³´ê°€ ë¹„ì–´ìžˆì–´ì•¼í•¨ 
+			solo.takeScreenshot("Field+Test+case+contentInfo_1+" + testDate);	//ÆÄÀÏ Á¤º¸ ÅØ½ºÆ®°¡ Àß¸²¾øÀÌ Ç¥½ÃµÇ´ÂÁö È®ÀÎ
+			//ÀÌÀü ÇÔ¼ö¿¡¼­ ¸· ´Ù¿î¹ÞÀº content ÀÌ¹Ç·Î, Ä¸Ã³ ÆÄÀÏ¿¡´Â Àç»ýÁ¤º¸°¡ ºñ¾îÀÖ¾î¾ßÇÔ 
 			solo.sleep(2000);
 		}
 		
@@ -535,19 +536,19 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			e.printStackTrace();
 		}
 		solo.sleep(13000);
-		solo.takeScreenshot("Field+Test+case+contentInfo_2+" + testDate);	//ìƒì„¸ë³´ê¸° ìž¬ìƒ ë²„íŠ¼ìœ¼ë¡œ content ìž¬ìƒë˜ëŠ”ì§€ í™•ì¸. 11 ì´ˆ ì¯¤ì´ ìº¡ì³ë˜ì–´ì•¼ í•¨.
-		//&& UI ì—ì„œ ìž˜ë¦¼ ëª‡ ê²¹ì¹¨ í˜„ìƒì´ ì—†ëŠ”ì§€ í™•ì¸
+		solo.takeScreenshot("Field+Test+case+contentInfo_2+" + testDate);	//»ó¼¼º¸±â Àç»ý ¹öÆ°À¸·Î content Àç»ýµÇ´ÂÁö È®ÀÎ. 11 ÃÊ ÂëÀÌ Ä¸ÃÄµÇ¾î¾ß ÇÔ.
+		//&& UI ¿¡¼­ Àß¸² ¸î °ãÄ§ Çö»óÀÌ ¾ø´ÂÁö È®ÀÎ
 		solo.sleep(2000);
 		
 		solo.goBack();
 		solo.sleep(2000);
-		solo.takeScreenshot("Field+Test+case+contentInfo_3+" + testDate);	//ìƒì„¸ë³´ê¸°ì—ì„œ ìž¬ìƒì •ë³´ê°€ ë“¤ì–´ê°”ëŠ”ì§€ í™•ì¸. 13 ì´ˆ ì¯¤ì´ ìº¡ì³ë˜ì–´ì•¼ í•¨.
-		//&& ë’¤ë¡œê°€ê¸° í‚¤ í´ë¦­ ì‹œ ìž¬ìƒ ì¢…ë£Œë˜ëŠ”ì§€ í™•ì¸
+		solo.takeScreenshot("Field+Test+case+contentInfo_3+" + testDate);	//»ó¼¼º¸±â¿¡¼­ Àç»ýÁ¤º¸°¡ µé¾î°¬´ÂÁö È®ÀÎ. 13 ÃÊ ÂëÀÌ Ä¸ÃÄµÇ¾î¾ß ÇÔ.
+		//&& µÚ·Î°¡±â Å° Å¬¸¯ ½Ã Àç»ý Á¾·áµÇ´ÂÁö È®ÀÎ
 		solo.sleep(2000);
 		
 		solo.goBack();
 		solo.sleep(2000);
-		solo.takeScreenshot("Field+Test+case+contentInfo_4+" + testDate);	//ìƒì„¸ë³´ê¸°ì—ì„œ ë¹ ì ¸ë‚˜ì˜¬ ìˆ˜ ìžˆëŠ”ì§€, ì¹´í…Œê³ ë¦¬ í™”ë©´ì´ ìº¡ì³ë˜ì—ˆëŠ”ì§€ í™•ì¸.	
+		solo.takeScreenshot("Field+Test+case+contentInfo_4+" + testDate);	//»ó¼¼º¸±â¿¡¼­ ºüÁ®³ª¿Ã ¼ö ÀÖ´ÂÁö, Ä«Å×°í¸® È­¸éÀÌ Ä¸ÃÄµÇ¾ú´ÂÁö È®ÀÎ.	
 		solo.sleep(2000);
 		
 		try {
@@ -564,15 +565,15 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			e.printStackTrace();
 		}
 		solo.sleep(3000);
-		solo.takeScreenshot("Field+Test+case+contentInfo_5+" + testDate);	//ê¸°ì¡´ ìž¬ìƒì •ë³´ê°€ ë‚¨ì•„ ìžˆë˜ ì˜ìƒì€ ì´ì–´ë³´ê¸° ë˜ëŠ”ì§€ í™•ì¸.
-		//&& ìƒì„¸ë³´ê¸° ë‚´ì—ì„œ ì˜ìƒ ìž¬ìƒ í›„, content ëª©ë¡ì—ì„œ ìž¬ìƒí•´ë„ ì´ì–´ë³´ê¸°ê°€ ë˜ëŠ”ì§€ í™•ì¸.
+		solo.takeScreenshot("Field+Test+case+contentInfo_5+" + testDate);	//±âÁ¸ Àç»ýÁ¤º¸°¡ ³²¾Æ ÀÖ´ø ¿µ»óÀº ÀÌ¾îº¸±â µÇ´ÂÁö È®ÀÎ.
+		//&& »ó¼¼º¸±â ³»¿¡¼­ ¿µ»ó Àç»ý ÈÄ, content ¸ñ·Ï¿¡¼­ Àç»ýÇØµµ ÀÌ¾îº¸±â°¡ µÇ´ÂÁö È®ÀÎ.
 		solo.sleep(3000);
 		
-		if(solo.waitForText("ì˜ˆ")) {
-			solo.clickOnText("ì˜ˆ");
+		if(solo.waitForText("¿¹")) {
+			solo.clickOnText("¿¹");
 			solo.sleep(3000);
 		}
-		solo.takeScreenshot("Field+Test+case+contentInfo_6+" + testDate);	//&& ì´ì–´ë³´ê¸° ì‹œ ì‹œìž‘ ìž¬ìƒì‹œê°„ì´ ìž¬ìƒì •ë³´ì™€ ë™ì¼í•œì§€ í™•ì¸. 15 ì´ˆ ì¯¤ì´ ìº¡ì³ë˜ì–´ì•¼ í•¨.
+		solo.takeScreenshot("Field+Test+case+contentInfo_6+" + testDate);	//&& ÀÌ¾îº¸±â ½Ã ½ÃÀÛ Àç»ý½Ã°£ÀÌ Àç»ýÁ¤º¸¿Í µ¿ÀÏÇÑÁö È®ÀÎ. 15 ÃÊ ÂëÀÌ Ä¸ÃÄµÇ¾î¾ß ÇÔ.
 		solo.sleep(1000);
 		
 		final IconTextView close_bt = (IconTextView) solo.getView(com.cdn.aquanmanager.R.id.CDN_TEST_BTN_CLOSE);
@@ -591,7 +592,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			e.printStackTrace();
 		}
 		solo.sleep(1000);
-		solo.takeScreenshot("Field+Test+case+closeBT+" + testDate);	//ì „ì› ë²„íŠ¼ì„ í´ë¦­ ì‹œ ìž¬ìƒ ì¢…ë£Œë˜ëŠ”ì§€ í™•ì¸
+		solo.takeScreenshot("Field+Test+case+closeBT+" + testDate);	//Àü¿ø ¹öÆ°À» Å¬¸¯ ½Ã Àç»ý Á¾·áµÇ´ÂÁö È®ÀÎ
 		
 	}
 	
@@ -647,9 +648,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			e.printStackTrace();
 		}
 		solo.sleep(6000);
-		if(solo.waitForText("ì˜ˆ")) {
-			solo.clickOnText("ì˜ˆ");
-			log("case ì´ì–´ë³´ê¸° ì˜ˆ í´ë¦­");
+		if(solo.waitForText("¿¹")) {
+			solo.clickOnText("¿¹");
+			log("case ÀÌ¾îº¸±â ¿¹ Å¬¸¯");
 			solo.sleep(3000);
 		}
 		
@@ -677,7 +678,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		solo.waitForView(com.cdn.aquanmanager.R.id.bookmark_dialog_listview);
 		ListView bookmarkList=(ListView) solo.getView(com.cdn.aquanmanager.R.id.bookmark_dialog_listview);
 
-		//ë¶ë§ˆí¬ ì¶”ê°€
+		//ºÏ¸¶Å© Ãß°¡
 		if(solo.waitForView(com.cdn.aquanmanager.R.id.bookmarktitle,1,2000)){
 			final View bookAdd=solo.getView(com.cdn.aquanmanager.R.id.bookmarktitle);
 			boolean loopout=false;
@@ -707,16 +708,16 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					break;
 				}
 				solo.sleep(3000);			
-				log("AquaWebPlayer bookmark ==="+bookmarkList.getAdapter().getCount()); //getAdapter() ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•˜ë©´ ê·¸ ë’¤ì— ì¹´ìš´íŠ¸ ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•  ìˆ˜ ìžˆìŒ.
-				if(bookmarkList.getAdapter().getCount()==30){ //30ê°œ ê¹Œì§€ë§Œ ì¶œë ¥ì´ ë˜ê³ 
-					solo.takeScreenshot("Field+Test+case+bookmarkOrder+" + testDate);	//ë¶ë§ˆí¬ë“¤ì´ ì‹œê°„ ìˆœìœ¼ë¡œ ì •ë ¬ë˜ëŠ”ì§€ í™•ì¸						
+				log("AquaWebPlayer bookmark ==="+bookmarkList.getAdapter().getCount()); //getAdapter() ¸Þ¼Òµå¸¦ »ç¿ëÇÏ¸é ±× µÚ¿¡ Ä«¿îÆ® ¸Þ¼Òµå¸¦ »ç¿ëÇÒ ¼ö ÀÖÀ½.
+				if(bookmarkList.getAdapter().getCount()==30){ //30°³ ±îÁö¸¸ Ãâ·ÂÀÌ µÇ°í
+					solo.takeScreenshot("Field+Test+case+bookmarkOrder+" + testDate);	//ºÏ¸¶Å©µéÀÌ ½Ã°£ ¼øÀ¸·Î Á¤·ÄµÇ´ÂÁö È®ÀÎ						
 					
-					//ë¶ë§ˆí¬ êµ¬ê°„ìœ¼ë¡œ ì´ë™í•˜ê³  ì‹¶ë‹¤.
+					//ºÏ¸¶Å© ±¸°£À¸·Î ÀÌµ¿ÇÏ°í ½Í´Ù.
 //					final View bookmark_row = bookmark_lv.getChildAt(0);
 //					final TextView bookmark_mv = (TextView) bookmark_row.findViewById(com.cdn.aquanmanager.R.id.tv_bookmark1);
-//					if(solo.waitForText("í™•ì¸")) {
-//						solo.clickOnText("í™•ì¸");
-//						log("ë¶ë§ˆí¬ 30 ê°œ ì´ˆê³¼ ì•Œë¦¼ ì°½ ë‹«ê¸°");
+//					if(solo.waitForText("È®ÀÎ")) {
+//						solo.clickOnText("È®ÀÎ");
+//						log("ºÏ¸¶Å© 30 °³ ÃÊ°ú ¾Ë¸² Ã¢ ´Ý±â");
 //						solo.sleep(1000);
 //					}
 //					final TextView bookmark_mv = (TextView) solo.getView(com.cdn.aquanmanager.R.id.tv_bookmark1);
@@ -733,17 +734,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //					} catch (Throwable e) {
 //						e.printStackTrace();
 //					}
-					loopout=true;	//ê·¸ ì´í›„ì—ëŠ” true ë¡œ ë³€ê²½í•˜ì—¬ 				
+					loopout=true;	//±× ÀÌÈÄ¿¡´Â true ·Î º¯°æÇÏ¿© 				
 				}				
 			}
 			
 			
 		}
 		
-//		solo.takeScreenshot("ì—¬ê¸°ê°€ ëŒ€ì²´ ì–´ë””ì•¼?" + testDate);	//ì—¬ê¸° ìœ„ì¹˜ : " í™•ì¸ " ëœ¨ëŠ” ì•Œë¦¼ ì°½
-//		if (solo.waitForText("í™•ì¸")) {
-//			solo.clickOnText("í™•ì¸");
-//			log("ë¶ë§ˆí¬ 30 ê°œ ì´ˆê³¼ ì•Œë¦¼ ì°½ ë‹«ê¸°");
+//		solo.takeScreenshot("¿©±â°¡ ´ëÃ¼ ¾îµð¾ß?" + testDate);	//¿©±â À§Ä¡ : " È®ÀÎ " ¶ß´Â ¾Ë¸² Ã¢
+//		if (solo.waitForText("È®ÀÎ")) {
+//			solo.clickOnText("È®ÀÎ");
+//			log("ºÏ¸¶Å© 30 °³ ÃÊ°ú ¾Ë¸² Ã¢ ´Ý±â");
 //			solo.sleep(1000);
 //		}
 //		final TextView bookmark_mv = (TextView) solo.getView(com.cdn.aquanmanager.R.id.tv_bookmark1);
@@ -762,7 +763,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //		}
 		
 		
-		//ë¶ë§ˆí¬ êµ¬ê°„ìœ¼ë¡œ ì´ë™í•˜ê³  ì‹¶ë‹¤.	
+		//ºÏ¸¶Å© ±¸°£À¸·Î ÀÌµ¿ÇÏ°í ½Í´Ù.	
 //		final TextView bookmark_mv = (TextView) solo.getView(com.cdn.aquanmanager.R.id.tv_bookmark1);
 //		try {
 //			runTestOnUiThread(new Runnable() {
@@ -778,17 +779,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //			e.printStackTrace();
 //		}
 		
-		if (solo.waitForText("í™•ì¸")) {
-			solo.takeScreenshot("Field+Test+case+bookmarkLimit+" + testDate);	//ë¶ë§ˆí¬ê°€ í•œë„ê°’ì¸ 30ê°œê¹Œì§€ ì¶”ê°€ë˜ëŠ”ì§€ í™•ì¸
-			solo.clickOnText("í™•ì¸");
-			log("ë¶ë§ˆí¬ 30 ê°œ ì´ˆê³¼ ì•Œë¦¼ ì°½ ë‹«ê¸°");
+		if (solo.waitForText("È®ÀÎ")) {
+			solo.takeScreenshot("Field+Test+case+bookmarkLimit+" + testDate);	//ºÏ¸¶Å©°¡ ÇÑµµ°ªÀÎ 30°³±îÁö Ãß°¡µÇ´ÂÁö È®ÀÎ
+			solo.clickOnText("È®ÀÎ");
+			log("ºÏ¸¶Å© 30 °³ ÃÊ°ú ¾Ë¸² Ã¢ ´Ý±â");
 			solo.sleep(1000);
 		}
 		solo.goBack();
 		solo.sleep(2000);
 		solo.goBack();
 		solo.sleep(2000);
-//		solo.takeScreenshot("ì—¬ê¸° ìœ„ì¹˜ëŠ”?" + testDate);	//ì—¬ê¸° ìœ„ì¹˜ : ìƒì„¸ë³´ê¸°
+//		solo.takeScreenshot("¿©±â À§Ä¡´Â?" + testDate);	//¿©±â À§Ä¡ : »ó¼¼º¸±â
 		
 		solo.waitForView(com.cdn.aquanmanager.R.id.content_info);
 //		final ImageButton play_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.content_play);
@@ -808,9 +809,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			e.printStackTrace();
 		}
 		solo.sleep(6000);
-		if(solo.waitForText("ì˜ˆ")) {
-			solo.clickOnText("ì˜ˆ");
-			log("case ì´ì–´ë³´ê¸° ì˜ˆ í´ë¦­");
+		if(solo.waitForText("¿¹")) {
+			solo.clickOnText("¿¹");
+			log("case ÀÌ¾îº¸±â ¿¹ Å¬¸¯");
 			solo.sleep(3000);
 		}
 		   
@@ -821,7 +822,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						log("case 5 ë¶ë§ˆí¬ ë²„íŠ¼ í´ë¦­");
+						log("case 5 ºÏ¸¶Å© ¹öÆ° Å¬¸¯");
 						bookmark_bt.callOnClick();
 					}
 				});
@@ -837,7 +838,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						solo.takeScreenshot("Field+Test+case+bookmarkRemain_1+" + testDate);	//ë¶ë§ˆí¬ ì •ë³´ê°€ ìž¬ìƒ ì¢…ë£Œ ì´í›„ì—ë„ ìœ ì§€ë˜ëŠ”ì§€ í™•ì¸
+						solo.takeScreenshot("Field+Test+case+bookmarkRemain_1+" + testDate);	//ºÏ¸¶Å© Á¤º¸°¡ Àç»ý Á¾·á ÀÌÈÄ¿¡µµ À¯ÁöµÇ´ÂÁö È®ÀÎ
 					}
 					
 				});
@@ -846,7 +847,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 		} 
 		
-		//ë¶ë§ˆí¬ë¥¼ ì‚­ì œ
+		//ºÏ¸¶Å©¸¦ »èÁ¦
 		for (int i=0; i<3; i++) {
 			View listRow=bookmark_lv.getChildAt(0);	
 			if(listRow==null){
@@ -871,18 +872,18 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				// TODO Auto-generated catch block//
 				e.printStackTrace();
 			}
-			solo.takeScreenshot("Field+Test+case+bookmarkRemove+" + testDate);	//ë¶ë§ˆí¬ ì‚­ì œê°€ ê°€ëŠ¥í•œì§€ í™•ì¸
+			solo.takeScreenshot("Field+Test+case+bookmarkRemove+" + testDate);	//ºÏ¸¶Å© »èÁ¦°¡ °¡´ÉÇÑÁö È®ÀÎ
 			solo.sleep(2000);
 		}
 		
-		//ìƒˆë¡œìš´ ì˜ìƒì„ ë‹¤ìš´ë¡œë“œ
+		//»õ·Î¿î ¿µ»óÀ» ´Ù¿î·Îµå
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + serverIp + "/media/auto/down2.asp"));
 		browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		Context instrumentationContext = getInstrumentation().getContext();
 		instrumentationContext.startActivity(browserIntent);
 		solo.sleep(5000);
-		if (solo.waitForText("í™•ì¸")) {
-			solo.clickOnText("í™•ì¸");
+		if (solo.waitForText("È®ÀÎ")) {
+			solo.clickOnText("È®ÀÎ");
 			solo.sleep(1000);
 		}
 		
@@ -907,8 +908,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			e.printStackTrace();
 		}
 		solo.sleep(3000);
-		if(solo.waitForText("ê°€")) {
-			solo.clickOnText("ê°€");
+		if(solo.waitForText("°¡")) {
+			solo.clickOnText("°¡");
 			solo.sleep(3000);
 		}
 		if(solo.waitForText("Let it go")) {
@@ -933,9 +934,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}
 		solo.sleep(3000);
 		
-		if(solo.waitForText("ì˜ˆ")) {
-			solo.clickOnText("ì˜ˆ");
-			log("case ì´ì–´ë³´ê¸° ì˜ˆ í´ë¦­");
+		if(solo.waitForText("¿¹")) {
+			solo.clickOnText("¿¹");
+			log("case ÀÌ¾îº¸±â ¿¹ Å¬¸¯");
 			solo.sleep(3000);
 		}
 		   
@@ -946,7 +947,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						log("case ë¶ë§ˆí¬ ë²„íŠ¼ í´ë¦­");
+						log("case ºÏ¸¶Å© ¹öÆ° Å¬¸¯");
 						bookmark_bt2.callOnClick();
 					}
 				});
@@ -962,7 +963,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						solo.takeScreenshot("Field+Test+case+bookmarkNotSame+" + testDate);	//ë¶ë§ˆí¬ ì •ë³´ê°€ ìž¬ìƒ ì¢…ë£Œ ì´í›„ì—ë„ ìœ ì§€ë˜ëŠ”ì§€ í™•ì¸
+						solo.takeScreenshot("Field+Test+case+bookmarkNotSame+" + testDate);	//ºÏ¸¶Å© Á¤º¸°¡ Àç»ý Á¾·á ÀÌÈÄ¿¡µµ À¯ÁöµÇ´ÂÁö È®ÀÎ
 					}
 					
 				});
@@ -997,7 +998,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}catch (Throwable e) {
 				e.printStackTrace();
 			}
-			solo.takeScreenshot("Field+Test+case+" + caseNumber + "+" + testDate);	//ìž ê¸ˆ ì•„ì´ì½˜ì„ í´ë¦­ í›„, í™”ë©´ì´ ìž ê¸ˆë˜ëŠ”ì§€ í™•ì¸
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "+" + testDate);	//Àá±Ý ¾ÆÀÌÄÜÀ» Å¬¸¯ ÈÄ, È­¸éÀÌ Àá±ÝµÇ´ÂÁö È®ÀÎ
 			solo.sleep(2000);
 		}
 		
@@ -1017,7 +1018,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}catch (Throwable e) {
 				e.printStackTrace();
 			}
-			solo.takeScreenshot("Field+Test+case+" + caseNumber + "End+" + testDate);	//ìž ê¸ˆ í•´ì œê°€ ì˜¤ë¡œì§€ ìž ê¸ˆ ì•„ì´ì½˜ í´ë¦­ ì‹œì—ë§Œ ì¼ì–´ë‚˜ëŠ”ì§€ í™•ì¸
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "End+" + testDate);	//Àá±Ý ÇØÁ¦°¡ ¿À·ÎÁö Àá±Ý ¾ÆÀÌÄÜ Å¬¸¯ ½Ã¿¡¸¸ ÀÏ¾î³ª´ÂÁö È®ÀÎ
 			solo.sleep(5000);
 		}
 		
@@ -1047,7 +1048,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
-			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Forward+" + testDate);	//ì•„ì´ì½˜ >> í´ë¦­ í›„, ë¹¨ë¦¬ê°ê¸°ê°€ ì´ë™í•˜ëŠ”ì§€ í™•ì¸
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Forward+" + testDate);	//¾ÆÀÌÄÜ >> Å¬¸¯ ÈÄ, »¡¸®°¨±â°¡ ÀÌµ¿ÇÏ´ÂÁö È®ÀÎ
 			solo.sleep(3000);
 		}
 		
@@ -1067,7 +1068,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
-			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Backward+" + testDate);	//ì•„ì´ì½˜ << í´ë¦­ í›„, ë˜ê°ê¸°ê°€ ì´ë™í•˜ëŠ”ì§€ í™•ì¸
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Backward+" + testDate);	//¾ÆÀÌÄÜ << Å¬¸¯ ÈÄ, µÇ°¨±â°¡ ÀÌµ¿ÇÏ´ÂÁö È®ÀÎ
 			solo.sleep(2000);
 		}
 		
@@ -1086,7 +1087,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
-			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Pause+" + testDate);	//ì•„ì´ì½˜ || í´ë¦­ í›„, ì¼ì‹œì •ì§€ê°€ ìž‘ë™í•˜ëŠ”ì§€ í™•ì¸
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Pause+" + testDate);	//¾ÆÀÌÄÜ || Å¬¸¯ ÈÄ, ÀÏ½ÃÁ¤Áö°¡ ÀÛµ¿ÇÏ´ÂÁö È®ÀÎ
 			solo.sleep(2000);
 		}
 		
@@ -1105,7 +1106,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 //			} catch (Throwable e) {
 //				e.printStackTrace();
 //			}
-//			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Fill+" + testDate);	//ì•„ì´ì½˜ í´ë¦­ í›„, í™”ë©´ì´ Fill ì¶œë ¥ë˜ëŠ”ì§€ í™•ì¸
+//			solo.takeScreenshot("Field+Test+case+" + caseNumber + "Fill+" + testDate);	//¾ÆÀÌÄÜ Å¬¸¯ ÈÄ, È­¸éÀÌ Fill Ãâ·ÂµÇ´ÂÁö È®ÀÎ
 //			solo.sleep(2000);
 //		}
 		
@@ -1113,8 +1114,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 	}
 	
 	public void testPlaylist(String caseNumber) {
-		solo.waitForActivity("AquaContent", 5000);
-		log("AquaContent wait end");
+		solo.waitForActivity("AquaPlaylist", 5000);
+		log("AquaPlaylist wait end");
 		solo.sleep(5000);
 		solo.waitForView(com.cdn.aquanmanager.R.id.playlist);
 		final ImageButton playlistTab_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.playlist);
@@ -1126,7 +1127,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					// TODO Auto-generated method stub
 					log("playlistTab button click");
 					playlistTab_bt.callOnClick();
-					log("case notyet playlistTab opened");
+					log("case playlist playlistTab opened");
+					solo.sleep(3000);
 				}
 				
 			});
@@ -1135,34 +1137,57 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}
 		solo.sleep(3000);
 		
-		solo.waitForView(com.cdn.aquanmanager.R.id.edit);
-		final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
-		try {
-			runTestOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					edit_bt.callOnClick();
-				}
-				
-			});
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		if(solo.waitForText("ìƒˆ ìž¬ìƒëª©ë¡")) {
-			solo.clickOnText("ìƒˆ ìž¬ìƒëª©ë¡");
+		solo.assertCurrentActivity("message", AquaPlaylist.class);
+		solo.waitForActivity("AquaPlaylist");
+		if (solo.waitForActivity("AquaPlaylist")) {
+			log("case playlist ÇÃ·¹ÀÌ¸®½ºÆ® ¾×Æ¼ºñÆ¼¸¦ wait Çß½À´Ï´Ù.");
+			
+			solo.waitForView(com.cdn.aquanmanager.R.id.edit);
+			if (solo.waitForView(com.cdn.aquanmanager.R.id.edit)) {			
+				log("case playlist ÆíÁý ¹öÆ° Ã£¾ÒÀ½!!");
+			}
 			solo.sleep(2000);
+			
+			solo.getCurrentActivity();
+			solo.assertCurrentActivity("message", AquaPlaylist.class);
+			
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {			
+				try {
+					runTestOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							edit_bt.callOnClick();
+							log("case playlist ÆíÁý ¹öÆ° Å¬¸¯!!");
+							solo.sleep(2000);
+						}
+						
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+
+			if(solo.waitForText("»õ Àç»ý¸ñ·Ï")) {
+				solo.clickOnText("»õ Àç»ý¸ñ·Ï");
+				solo.sleep(2000);
+			}
+			solo.sleep(20000);
+			
 		}
 		
-		//ì´ì œ ì—¬ê¸°ì„œë¶€í„°, ë¡œë³´í‹°ì›€ì„ ì´ìš©í•´ ìžíŒì„ ì¹  ìˆ˜ ìžˆë‚˜......?
-		//ì•„ë‹ˆë©´ ìž…ë ¥ì¹¸ì—ë‹¤ê°€ ë‚´ê°€ ì§ì ‘ ì½”ë“œ ìƒìœ¼ë¡œ ìž¬ìƒëª©ë¡ì˜ ì´ë¦„ "!@34í•œêµ­ì–´eng" ì„ ë„£ì„ ìˆ˜ ìžˆì„ê¹Œ?
+		
+		
+		//ÀÌÁ¦ ¿©±â¼­ºÎÅÍ, ·Îº¸Æ¼¿òÀ» ÀÌ¿ëÇØ ÀÚÆÇÀ» Ä¥ ¼ö ÀÖ³ª......?
+		//¾Æ´Ï¸é ÀÔ·ÂÄ­¿¡´Ù°¡ ³»°¡ Á÷Á¢ ÄÚµå »óÀ¸·Î Àç»ý¸ñ·ÏÀÇ ÀÌ¸§ "!@34ÇÑ±¹¾îeng" À» ³ÖÀ» ¼ö ÀÖÀ»±î?
 		
 		solo.sleep(2000);
 	}
 	
 		public void testwatermarkText(String uri, int caseNumber) {
-		//í™”ë©´ì— ì—¬ëŸ¬ ë¬¸ìžë“¤ì´ ë“¤ì–´ìžˆì–´ë„ í…ìŠ¤íŠ¸ê°€ ìž˜ ë‚˜ì˜¤ëŠ”ì§€ í™•ì¸ ì¼€ì´ìŠ¤(ì˜¤ë¥˜ë‚¨)		
+		//È­¸é¿¡ ¿©·¯ ¹®ÀÚµéÀÌ µé¾îÀÖ¾îµµ ÅØ½ºÆ®°¡ Àß ³ª¿À´ÂÁö È®ÀÎ ÄÉÀÌ½º(¿À·ù³²)		
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1176,13 +1201,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 18 ì›Œí„°ë§ˆí¬ í…ìŠ¤íŠ¸ì— í•œê¸€ê³¼ ì˜ë¬¸ íŠ¹ìˆ˜ë¬¸ìžê°€ í¬í•¨ë˜ë„ ìž˜ ë‚˜ì˜¤ëŠ”");
+				log("case 18 ¿öÅÍ¸¶Å© ÅØ½ºÆ®¿¡ ÇÑ±Û°ú ¿µ¹® Æ¯¼ö¹®ÀÚ°¡ Æ÷ÇÔµÇµµ Àß ³ª¿À´Â");
 				solo.sleep(3000);
 			}
 		}
  
 		public void testwatermarkImage(String uri, int caseNumber) {
-		//í™”ë©´ì— ì›Œí„°ë§ˆí¬ê°€ ì´ë¯¸ì§€ë©´ ì´ë¯¸ì§€ ìž˜ ë‚˜ì˜¤ëŠ”ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
+		//È­¸é¿¡ ¿öÅÍ¸¶Å©°¡ ÀÌ¹ÌÁö¸é ÀÌ¹ÌÁö Àß ³ª¿À´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼ö
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1196,13 +1221,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 19 ì›Œí„°ë§ˆí¬ ì´ë¯¸ì§€ë©´ ì´ë¯¸ì§€ê°€ ìž˜ ë‚˜ì˜¤ëŠ”");
+				log("case 19 ¿öÅÍ¸¶Å© ÀÌ¹ÌÁö¸é ÀÌ¹ÌÁö°¡ Àß ³ª¿À´Â");
 				solo.sleep(3000);
 			}
 		}	
 		
 		public void testwatermarkTextColor(String uri, int caseNumber) {
-		//í™”ë©´ì— ì›Œí„°ë§ˆí¬ í…ìŠ¤íŠ¸ì— ì¹¼ë¼ë¥¼ ì ìš©í•´ë„ ìž˜ ë‚˜ì˜¤ëŠ”ê°€? (ì˜¤ë¥˜ë‚¨)	
+		//È­¸é¿¡ ¿öÅÍ¸¶Å© ÅØ½ºÆ®¿¡ Ä®¶ó¸¦ Àû¿ëÇØµµ Àß ³ª¿À´Â°¡? (¿À·ù³²)	
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1216,13 +1241,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 20 ì›Œí„°ë§ˆí¬ í…ìŠ¤íŠ¸ ìƒ‰ìƒì„ ì ìš©í•œ ê²½ìš°.");
+				log("case 20 ¿öÅÍ¸¶Å© ÅØ½ºÆ® »ö»óÀ» Àû¿ëÇÑ °æ¿ì.");
 				solo.sleep(3000);
 			}
 		}	
 		
 		public void testclosebutton(String uri, int caseNumber) {
-		//ìž¬ìƒí™”ë©´ ì¢…ë£Œ ë²„íŠ¼í´ë¦­í•˜ê¸° 
+		//Àç»ýÈ­¸é Á¾·á ¹öÆ°Å¬¸¯ÇÏ±â 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1239,7 +1264,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							log("case 21 ì¢…ë£Œ ë²„íŠ¼ ëˆ„ë¥¼ ë•Œ ìž˜ ë˜ëŠ”");
+							log("case 21 Á¾·á ¹öÆ° ´©¸¦ ¶§ Àß µÇ´Â");
 							close_bt.callOnClick();
 							solo.sleep(3000);
 						}
@@ -1254,14 +1279,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 21 ì¢…ë£Œ ë²„íŠ¼ í›„ ë¡œë³´í‹°ì›€ ì¢…ë£Œ.");
+				log("case 21 Á¾·á ¹öÆ° ÈÄ ·Îº¸Æ¼¿ò Á¾·á.");
 				solo.sleep(3000);
 			}
 
 		}
 		
 		public void testPopUpPlaybutton(String uri, int caseNumber) {
-		//íŒì—…ì°½ ë„ìš°ëŠ” ë²„íŠ¼ í´ë¦­í•˜ê¸° 
+		//ÆË¾÷Ã¢ ¶ç¿ì´Â ¹öÆ° Å¬¸¯ÇÏ±â 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1279,7 +1304,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 						public void run() {
 							// TODO Auto-generated method stub
 							popup_bt.callOnClick();
-							log("case 23 íŒì—… í”Œë ˆì´ ë²„íŠ¼ì„ ì‚¬ìš©");
+							log("case 23 ÆË¾÷ ÇÃ·¹ÀÌ ¹öÆ°À» »ç¿ë");
 							solo.sleep(3000);
 						}
 					});
@@ -1293,14 +1318,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 23 íŒì—…í”Œë ˆì´ ê²°ê³¼ ìº¡ì³.");
+				log("case 23 ÆË¾÷ÇÃ·¹ÀÌ °á°ú Ä¸ÃÄ.");
 				solo.sleep(3000);
 			}
 
 		}
 		
 		public void testPopUpCloseIcon(String uri, int caseNumber) {
-		//íŒì—…ì°½ ë‹«ê¸° ì•„ì´ì½˜ í´ë¦­í•˜ê¸° 
+		//ÆË¾÷Ã¢ ´Ý±â ¾ÆÀÌÄÜ Å¬¸¯ÇÏ±â 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1318,7 +1343,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 						public void run() {
 							// TODO Auto-generated method stub
 							popup_bt.callOnClick();
-							log("case 24 íŒì—…í”Œë ˆì´ ì‚¬ìš©");
+							log("case 24 ÆË¾÷ÇÃ·¹ÀÌ »ç¿ë");
 							solo.sleep(3000);
 						}
 					});
@@ -1336,7 +1361,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 						public void run() {
 							// TODO Auto-generated method stub
 							popup_close_bt.callOnClick();
-							log("case 24 íŒì—…í”Œë ˆì´ Xë²„íŠ¼ìœ¼ë¡œ ì¢…ë£Œí•˜ê¸°");
+							log("case 24 ÆË¾÷ÇÃ·¹ÀÌ X¹öÆ°À¸·Î Á¾·áÇÏ±â");
 							solo.sleep(3000);
 						}
 					});
@@ -1350,14 +1375,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 24 íŒì—…í”Œë ˆì´ Xë²„íŠ¼ìœ¼ë¡œ ì¢…ë£Œí•˜ê¸°");
+				log("case 24 ÆË¾÷ÇÃ·¹ÀÌ X¹öÆ°À¸·Î Á¾·áÇÏ±â");
 				solo.sleep(3000);
 			}
 
 		}		
 	
 		public void testStreamingContentsPlay(String uri, int caseNumber) {
-		//ìŠ¤íŠ¸ë¦¬ë° ì½˜í…ì¸  ì •ìƒ ìž¬ìƒí™•ì¸í•˜ê¸° 
+		//½ºÆ®¸®¹Ö ÄÜÅÙÃ÷ Á¤»ó Àç»ýÈ®ÀÎÇÏ±â 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1372,14 +1397,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 25 ìŠ¤íŠ¸ë¦¬ë° ì½˜í…ì¸  ì •ìƒìž¬ìƒ í™•ì¸.");
+				log("case 25 ½ºÆ®¸®¹Ö ÄÜÅÙÃ÷ Á¤»óÀç»ý È®ÀÎ.");
 				solo.sleep(3000);
 			}
 
 		}
 		
 		public void replayStreamingContent(String url, int caseNum){
-		//ìŠ¤íŠ¸ë¦¬ë° ìž¬ìƒí•˜ëŠ” ì½˜í…ì¸  
+		//½ºÆ®¸®¹Ö Àç»ýÇÏ´Â ÄÜÅÙÃ÷ 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1392,7 +1417,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}		
 
 		public void testStreamingContentsNoReplay(String uri, int caseNumber) {
-		//ìŠ¤íŠ¸ë¦¬ë° ì½˜í…ì¸ ëŠ” ì´ì–´ë³´ê¸°ê°€ ë˜ì§€ ì•ŠëŠ”ì§€ í™•ì¸í•˜ëŠ” ì¼€ì´ìŠ¤.  
+		//½ºÆ®¸®¹Ö ÄÜÅÙÃ÷´Â ÀÌ¾îº¸±â°¡ µÇÁö ¾Ê´ÂÁö È®ÀÎÇÏ´Â ÄÉÀÌ½º.  
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1410,7 +1435,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							log("case 26 ìŠ¤íŠ¸ë¦¬ë° ì½˜í…ì¸  ì¢…ë£Œ ë²„íŠ¼ í´ë¦­");
+							log("case 26 ½ºÆ®¸®¹Ö ÄÜÅÙÃ÷ Á¾·á ¹öÆ° Å¬¸¯");
 							close_bt.callOnClick();
 							solo.sleep(3000);
 						}
@@ -1420,20 +1445,20 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}
 			}
 			
-			//í•¨ìˆ˜ ì‹¤í–‰ ì¢…ë£Œ í›„ ë™ì¼ ì»¨í… í•œë²ˆ ë” ìŠ¤íŠ¸ë¦¬ë° ì‹¤í–‰
+			//ÇÔ¼ö ½ÇÇà Á¾·á ÈÄ µ¿ÀÏ ÄÁÅÙ ÇÑ¹ø ´õ ½ºÆ®¸®¹Ö ½ÇÇà
 			replayStreamingContent("http://" + serverIp + "/media/auto/player2.asp", 56);
 			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 			solo.sleep(4000);
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 26 ìŠ¤íŠ¸ë¦¬ë° ì½˜í…ì¸ ë¥¼ ë‹¤ì‹œ ì‹¤í–‰í•˜ë©´ ì´ì–´ë³´ê¸° ì•ˆë˜ëŠ”ì§€ í™•ì¸.");
+				log("case 26 ½ºÆ®¸®¹Ö ÄÜÅÙÃ÷¸¦ ´Ù½Ã ½ÇÇàÇÏ¸é ÀÌ¾îº¸±â ¾ÈµÇ´ÂÁö È®ÀÎ.");
 				solo.sleep(3000);
 			}			
 		}
 		
 		public void testDownloadProgressBar(String uri, int caseNumber) {
-		//ë‹¤ìš´ë¡œë“œí•  ë•Œ ê²Œì´ì§€ë°”ë‚˜ íŒŒì¼ëª… ë“±ì´ ì •í™•í•˜ê²Œ ë‚˜ì˜¤ëŠ”ì§€ í™•ì¸.			
+		//´Ù¿î·ÎµåÇÒ ¶§ °ÔÀÌÁö¹Ù³ª ÆÄÀÏ¸í µîÀÌ Á¤È®ÇÏ°Ô ³ª¿À´ÂÁö È®ÀÎ.			
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1441,23 +1466,23 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			log("Field Test case " + caseNumber + " opened");
 			instrumentationContext.startActivity(browserIntent);
 			
-			if (solo.waitForText("í™•ì¸")) {
-				solo.clickOnText("í™•ì¸");
-				log("case 27 ë‹¤ìš´ë¡œë“œ í•  ë•Œ í”„ë¡œê·¸ë ˆìŠ¤ ë°” ì •ìƒì ìœ¼ë¡œ ì˜¬ë¼ê°€ëŠ”ê°€ í™•ì¸.");
+			if (solo.waitForText("È®ÀÎ")) {
+				solo.clickOnText("È®ÀÎ");
+				log("case 27 ´Ù¿î·Îµå ÇÒ ¶§ ÇÁ·Î±×·¹½º ¹Ù Á¤»óÀûÀ¸·Î ¿Ã¶ó°¡´Â°¡ È®ÀÎ.");
 				solo.sleep(4000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				
-				if (solo.waitForText("ì˜ˆ")) {
-					solo.clickOnText("ì˜ˆ");
+				if (solo.waitForText("¿¹")) {
+					solo.clickOnText("¿¹");
 					solo.sleep(2000);
 				}	
 			}			
 		}		
 
 		public void testVideoUserNameSorting(int caseNumber) {
-		//ë¹„ë””ì˜¤íƒ­ ì‚¬ìš©ìžì •ë ¬ ê¸°ëŠ¥. 
+		//ºñµð¿ÀÅÇ »ç¿ëÀÚÁ¤·Ä ±â´É. 
 			
-			//ë¨¼ì € video tabì„ ì§„ìž…í•œë‹¤.
+			//¸ÕÀú video tabÀ» ÁøÀÔÇÑ´Ù.
 			solo.sleep(2000);
 			solo.waitForActivity("AquaContent", 5000);
 			log("case 28 AquaContent wait end");
@@ -1472,17 +1497,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(2000);
 			}
 			
-			//íŽ¸ì§‘ ë²„íŠ¼ì„ ì°¾ì•„ì„œ í´ë¦­í•˜ëŠ” êµ¬ë¬¸.
+			//ÆíÁý ¹öÆ°À» Ã£¾Æ¼­ Å¬¸¯ÇÏ´Â ±¸¹®.
 			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
 			if (edit_bt != null) {	
-				log("case 28 edit ë²„íŠ¼ì„ ì°¾ìŒ.");
+				log("case 28 edit ¹öÆ°À» Ã£À½.");
 				try {
 						runTestOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								edit_bt.callOnClick();
-								log("case 28 edit ë²„íŠ¼ì„ í´ë¦­.");
+								log("case 28 edit ¹öÆ°À» Å¬¸¯.");
 								solo.sleep(2000);
 							}		
 						});
@@ -1491,19 +1516,19 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}
 			}
 			
-			//ê°•ì˜ëª… ì •ë ¬ ë¼ë””ì˜¤ë²„íŠ¼ì„ í´ë¦­í•˜ëŠ” êµ¬ë¬¸. 
-			if(solo.waitForText("ì‚¬ìš©ìž ì •ë ¬")) {
-				solo.clickOnText("ì‚¬ìš©ìž ì •ë ¬");
-				log("case 28 ì‚¬ìš©ìž ì •ë ¬ëœ ì˜ìƒë“¤ì˜ ëª¨ìŠµì„ í™•ì¸.");
+			//°­ÀÇ¸í Á¤·Ä ¶óµð¿À¹öÆ°À» Å¬¸¯ÇÏ´Â ±¸¹®. 
+			if(solo.waitForText("»ç¿ëÀÚ Á¤·Ä")) {
+				solo.clickOnText("»ç¿ëÀÚ Á¤·Ä");
+				log("case 28 »ç¿ëÀÚ Á¤·ÄµÈ ¿µ»óµéÀÇ ¸ð½ÀÀ» È®ÀÎ.");
 				solo.sleep(500);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 			}
 		}				
 		
 		public void testVideoContentNameSorting(int caseNumber) {
-		//ë¹„ë””ì˜¤íƒ­ ê°•ì˜ëª…ì •ë ¬ ê¸°ëŠ¥. 
+		//ºñµð¿ÀÅÇ °­ÀÇ¸íÁ¤·Ä ±â´É. 
 			
-			//ë¨¼ì € video tabì„ ì§„ìž…í•œë‹¤.
+			//¸ÕÀú video tabÀ» ÁøÀÔÇÑ´Ù.
 			solo.sleep(1000);
 			solo.waitForActivity("AquaContent", 1000);
 			log("case 29 AquaContent wait end");
@@ -1518,17 +1543,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(2000);
 			}
 			
-			//íŽ¸ì§‘ ë²„íŠ¼ì„ ì°¾ì•„ì„œ í´ë¦­í•˜ëŠ” êµ¬ë¬¸.
+			//ÆíÁý ¹öÆ°À» Ã£¾Æ¼­ Å¬¸¯ÇÏ´Â ±¸¹®.
 			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
 			if (edit_bt != null) {	
-				log("case 29 edit ë²„íŠ¼ì„ ì°¾ìŒ.");
+				log("case 29 edit ¹öÆ°À» Ã£À½.");
 				try {
 						runTestOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								edit_bt.callOnClick();
-								log("case 29 edit ë²„íŠ¼ì„ í´ë¦­.");
+								log("case 29 edit ¹öÆ°À» Å¬¸¯.");
 								solo.sleep(500);
 							}		
 						});
@@ -1537,10 +1562,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}
 			}
 			
-			//ê°•ì˜ëª… ì •ë ¬ ë¼ë””ì˜¤ë²„íŠ¼ì„ í´ë¦­í•˜ëŠ” êµ¬ë¬¸. 
-			if(solo.waitForText("ê°•ì˜ëª… ì •ë ¬")) {
-				solo.clickOnText("ê°•ì˜ëª… ì •ë ¬");
-				log("case 29 ê°•ì˜ëª…ì •ë ¬ëœ ì˜ìƒë“¤ì˜ ëª¨ìŠµì„ í™•ì¸.");
+			//°­ÀÇ¸í Á¤·Ä ¶óµð¿À¹öÆ°À» Å¬¸¯ÇÏ´Â ±¸¹®. 
+			if(solo.waitForText("°­ÀÇ¸í Á¤·Ä")) {
+				solo.clickOnText("°­ÀÇ¸í Á¤·Ä");
+				log("case 29 °­ÀÇ¸íÁ¤·ÄµÈ ¿µ»óµéÀÇ ¸ð½ÀÀ» È®ÀÎ.");
 				solo.sleep(2000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				solo.sleep(1000);
@@ -1554,9 +1579,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}	
 		
 		public void testVideoFolderUserSorting(int caseNumber) {
-		//ë¹„ë””ì˜¤íƒ­ í´ë” ì‚¬ìš©ìžì •ë ¬ ê¸°ëŠ¥. 
+		//ºñµð¿ÀÅÇ Æú´õ »ç¿ëÀÚÁ¤·Ä ±â´É. 
 			
-			//ë¨¼ì € video tabì„ ì§„ìž…í•œë‹¤.
+			//¸ÕÀú video tabÀ» ÁøÀÔÇÑ´Ù.
 			solo.sleep(2000);
 			solo.waitForActivity("AquaContent", 5000);
 			log("case 28 AquaContent wait end");
@@ -1567,17 +1592,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(2000);
 			}
 			
-			//íŽ¸ì§‘ ë²„íŠ¼ì„ ì°¾ì•„ì„œ í´ë¦­í•˜ëŠ” êµ¬ë¬¸.
+			//ÆíÁý ¹öÆ°À» Ã£¾Æ¼­ Å¬¸¯ÇÏ´Â ±¸¹®.
 			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
 			if (edit_bt != null) {	
-				log("case 30 edit ë²„íŠ¼ì„ ì°¾ìŒ.");
+				log("case 30 edit ¹öÆ°À» Ã£À½.");
 				try {
 						runTestOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								edit_bt.callOnClick();
-								log("case 30 edit ë²„íŠ¼ì„ í´ë¦­.");
+								log("case 30 edit ¹öÆ°À» Å¬¸¯.");
 								solo.sleep(2000);
 							}		
 						});
@@ -1586,10 +1611,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}
 			}
 			
-			//ì‚¬ìš©ìž ì •ë ¬ ë¼ë””ì˜¤ë²„íŠ¼ì„ í´ë¦­í•˜ëŠ” êµ¬ë¬¸. 
-			if(solo.waitForText("ì‚¬ìš©ìž ì •ë ¬")) {
-				solo.clickOnText("ì‚¬ìš©ìž ì •ë ¬");
-				log("case 30 ì‚¬ìš©ìž ì •ë ¬ëœ ì˜ìƒë“¤ì˜ ëª¨ìŠµì„ í™•ì¸.");
+			//»ç¿ëÀÚ Á¤·Ä ¶óµð¿À¹öÆ°À» Å¬¸¯ÇÏ´Â ±¸¹®. 
+			if(solo.waitForText("»ç¿ëÀÚ Á¤·Ä")) {
+				solo.clickOnText("»ç¿ëÀÚ Á¤·Ä");
+				log("case 30 »ç¿ëÀÚ Á¤·ÄµÈ ¿µ»óµéÀÇ ¸ð½ÀÀ» È®ÀÎ.");
 				solo.sleep(4000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				solo.sleep(1000);
@@ -1597,9 +1622,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}		
 
 		public void testVideoFolderNameSorting(int caseNumber) {
-		//ë¹„ë””ì˜¤íƒ­ í´ë” í´ë”ì •ë ¬ ê¸°ëŠ¥. 
+		//ºñµð¿ÀÅÇ Æú´õ Æú´õÁ¤·Ä ±â´É. 
 			
-			//ë¨¼ì € video tabì„ ì§„ìž…í•œë‹¤.
+			//¸ÕÀú video tabÀ» ÁøÀÔÇÑ´Ù.
 			solo.sleep(2000);
 			solo.waitForActivity("AquaContent", 2000);
 			log("case 31 AquaContent wait end");
@@ -1610,17 +1635,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(2000);
 			}
 			
-			//íŽ¸ì§‘ ë²„íŠ¼ì„ ì°¾ì•„ì„œ í´ë¦­í•˜ëŠ” êµ¬ë¬¸.
+			//ÆíÁý ¹öÆ°À» Ã£¾Æ¼­ Å¬¸¯ÇÏ´Â ±¸¹®.
 			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
 			if (edit_bt != null) {	
-				log("case 31 edit ë²„íŠ¼ì„ ì°¾ìŒ.");
+				log("case 31 edit ¹öÆ°À» Ã£À½.");
 				try {
 						runTestOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								edit_bt.callOnClick();
-								log("case 31 edit ë²„íŠ¼ì„ í´ë¦­.");
+								log("case 31 edit ¹öÆ°À» Å¬¸¯.");
 								solo.sleep(2000);
 							}		
 						});
@@ -1629,10 +1654,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}
 			}
 			
-			//ê°•ì˜ëª… ì •ë ¬ ë¼ë””ì˜¤ë²„íŠ¼ì„ í´ë¦­í•˜ëŠ” êµ¬ë¬¸. 
-			if(solo.waitForText("ê°•ì˜ëª… ì •ë ¬")) {
-				solo.clickOnText("ê°•ì˜ëª… ì •ë ¬");
-				log("case 31 ê°•ì˜ëª… ì •ë ¬ëœ ì˜ìƒë“¤ì˜ ëª¨ìŠµì„ í™•ì¸.");
+			//°­ÀÇ¸í Á¤·Ä ¶óµð¿À¹öÆ°À» Å¬¸¯ÇÏ´Â ±¸¹®. 
+			if(solo.waitForText("°­ÀÇ¸í Á¤·Ä")) {
+				solo.clickOnText("°­ÀÇ¸í Á¤·Ä");
+				log("case 31 °­ÀÇ¸í Á¤·ÄµÈ ¿µ»óµéÀÇ ¸ð½ÀÀ» È®ÀÎ.");
 				solo.sleep(4000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				solo.sleep(1000);
