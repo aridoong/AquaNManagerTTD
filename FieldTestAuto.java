@@ -178,9 +178,11 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		
 		//testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
 		testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
+		//testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);		
 		testclosebutton("http://" + serverIp + "/media/auto/player15.asp", 52);
 		testPopUpPlaybutton("http://" + serverIp + "/media/auto/player2.asp", 53);
-		//testwatermarkTextColor("http://" + serverIp + "/media/auto/wm_textColor.asp", 51);
+		testPopUpCloseIcon("http://" + serverIp + "/media/auto/player2.asp", 54);
+		testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
 		
 		//잠깐 플레이리스트 관련 Test 를 진행합니다.
 		//testPlaylist("playlist");
@@ -1155,10 +1157,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		
 	}
 	
-	
-	//화면에 여러 문자들이 들어있어도 텍스트가 잘 나오는 (오류남)
 		public void testwatermarkText(String uri, int caseNumber) {
-			
+		//화면에 여러 문자들이 들어있어도 텍스트가 잘 나오는지 확인 케이스(오류남)		
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1176,10 +1176,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(3000);
 			}
 		}
-
-		//화면에 워터마크가 이미지면 이미지 잘 나오는지 확인하는 함수 
+ 
 		public void testwatermarkImage(String uri, int caseNumber) {
-			
+		//화면에 워터마크가 이미지면 이미지 잘 나오는지 확인하는 함수
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1198,9 +1197,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 		}	
 		
-		//화면에 워터마크 텍스트에 칼라를 적용해도 잘 나오는가? (오류남)
 		public void testwatermarkTextColor(String uri, int caseNumber) {
-			
+		//화면에 워터마크 텍스트에 칼라를 적용해도 잘 나오는가? (오류남)	
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1214,13 +1212,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
 				final Button button_ok = (Button) solo.getView(android.R.id.button1);
 				button_ok.callOnClick();
-				log("case 20 워터마크 텍스트 색상을 적용했을 ");
+				log("case 20 워터마크 텍스트 색상을 적용한 경우.");
 				solo.sleep(3000);
 			}
 		}	
 		
 		public void testclosebutton(String uri, int caseNumber) {
-			
+		//재생화면 종료 버튼클릭하기 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1256,10 +1254,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(3000);
 			}
 
-		}	
-
+		}
+		
 		public void testPopUpPlaybutton(String uri, int caseNumber) {
-			
+		//팝업창 띄우는 버튼 클릭하기 
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1276,8 +1274,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
-							log("case 23 팝업 플레이 버튼을 사용");
 							popup_bt.callOnClick();
+							log("case 23 팝업 플레이 버튼을 사용");
 							solo.sleep(3000);
 						}
 					});
@@ -1296,7 +1294,87 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 
 		}
-	
+		
+		public void testPopUpCloseIcon(String uri, int caseNumber) {
+		//팝업창 닫기 아이콘 클릭하기 
+			solo = new Solo(getInstrumentation(), getActivity());
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Context instrumentationContext = getInstrumentation().getContext();
+			log("Field Test case " + caseNumber + " opened");
+			instrumentationContext.startActivity(browserIntent);
+			solo.assertCurrentActivity("message", AquaWebPlayer.class);
+
+			final ImageButton popup_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.CDN_TEST_POPUP);
+			if (popup_bt != null) {
+				try {
+					runTestOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							popup_bt.callOnClick();
+							log("case 24 팝업플레이 사용");
+							solo.sleep(3000);
+						}
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}			
+			
+			final ImageButton popup_close_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.btn_close);
+			if (popup_close_bt != null) {
+				try {
+					runTestOnUiThread(new Runnable() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							popup_close_bt.callOnClick();
+							log("case 24 팝업플레이 X버튼으로 종료하기");
+							solo.sleep(3000);
+						}
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			solo.sleep(5000);
+			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+			solo.sleep(3000);
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+				final Button button_ok = (Button) solo.getView(android.R.id.button1);
+				button_ok.callOnClick();
+				log("case 24 팝업플레이 X버튼으로 종료하기");
+				solo.sleep(3000);
+			}
+
+		}		
+
+		
+		public void testStreamingContentsPlay(String uri, int caseNumber) {
+		//스트리밍 콘텐츠 정상 재생확인하기 
+			solo = new Solo(getInstrumentation(), getActivity());
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			Context instrumentationContext = getInstrumentation().getContext();
+			log("Field Test case " + caseNumber + " opened");
+			instrumentationContext.startActivity(browserIntent);
+			solo.assertCurrentActivity("message", AquaWebPlayer.class);
+
+			solo.sleep(8000);
+			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+			solo.sleep(5000);
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+				final Button button_ok = (Button) solo.getView(android.R.id.button1);
+				button_ok.callOnClick();
+				log("case 25 스트리밍 콘텐츠 정상재생 확인.");
+				solo.sleep(3000);
+			}
+
+		}			
+		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();
 		
