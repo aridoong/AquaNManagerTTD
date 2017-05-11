@@ -186,6 +186,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
 		//testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
 		//testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
+		testVideoContentNameSorting("http://" + serverIp + "/media/auto/player2.asp", 57);
 		
 		//잠깐 플레이리스트 관련 Test 를 진행합니다.
 		//testPlaylist("playlist");
@@ -1461,11 +1462,12 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			instrumentationContext.startActivity(browserIntent);
 			solo.assertCurrentActivity("message", AquaWebPlayer.class);
 
-			final ImageButton edit_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.CDN_TEST_POPUP);
+			solo.waitForView(com.cdn.aquanmanager.R.layout.layout_contents_list);
+			solo.waitForView(com.cdn.aquanmanager.R.id.edit);
+			final Button edit_bt = (Button) solo.getView(com.cdn.aquanmanager.R.id.edit);
 			if (edit_bt != null) {
 				try {
-					runTestOnUiThread(new Runnable() {
-
+						runTestOnUiThread(new Runnable() {
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
@@ -1479,23 +1481,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				}
 			}	
 			solo.sleep(1000);
-			final ImageButton sorting_bt = (ImageButton) solo.getView(com.cdn.aquanmanager.R.id.btn_close);
-			if (sorting_bt != null) {
-				try {
-					runTestOnUiThread(new Runnable() {
-
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							sorting_bt.callOnClick();
-							log("case 28 사용자가 콘텐츠를 정렬할 때");
-							solo.sleep(3000);
-						}
-					});
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
-			}
+			
+			
 			solo.sleep(5000);
 			solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 			solo.sleep(3000);
