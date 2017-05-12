@@ -190,10 +190,12 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
 		//testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
 		//testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
-		testVideoUserNameSorting(58);
-		testVideoContentNameSorting(59);
-		testVideoFolderUserSorting(60);
-		testVideoFolderNameSorting(61);
+		//testVideoUserNameSorting(58);
+		//testVideoContentNameSorting(59);
+		//testVideoFolderUserSorting(60);
+		//testVideoFolderNameSorting(61);
+		//testVideoContentDelete(62);
+		//testVideoFolderDelete(63);
 
 		solo.waitForActivity("AquaContent", 5000);
 		log("AquaContent wait End");
@@ -1701,12 +1703,145 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		
 		public void testVideoContentDelete(int caseNumber) {
 		//비디오 탭 파일 삭제 기능.
+			//먼저 video tab을 진입한다.
+			
+			solo.sleep(2000);
+			solo.waitForActivity("AquaContent", 5000);
+			log("case 32 AquaContent wait end");
+			
+			solo.sleep(3000);
+			if(solo.waitForText("jihyetest")) {
+				solo.clickOnText("jihyetest");
+				solo.sleep(2000);
+			}
+			if(solo.waitForText("crs2")) {
+				solo.clickOnText("crs2");
+				solo.sleep(2000);
+			}
+			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 32 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 32 edit 버튼을 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//강의명 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("편집")) {
+				solo.clickOnText("편집");
+				log("case 32 편집 클");
+				solo.sleep(500);
+			}
+
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final ImageButton delete_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.delete_btn);
+			if (delete_bt != null) {	
+				log("case 32 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								delete_bt.callOnClick();
+								log("case 32 delete 버튼 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                solo.takeScreenshot("Field+Test+case" + "32-1" + "+" + testDate);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}			
+			solo.takeScreenshot("Field+Test+case" + "32-2" + "+" + testDate);
 			
 		}
 		
 		public void testVideoFolderDelete(int caseNumber) {
 		//비디오 탭 폴더 삭제 기능.
+			solo.sleep(2000);
+
+			if(solo.waitForText("뒤로")) {
+				solo.clickOnText("뒤로");
+				solo.sleep(2000);
+				log("case 33 뒤로 버튼을 클릭.");
+			}
 			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 33 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 33 edit 버튼을 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			//강의명 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("편집")) {
+				solo.clickOnText("편집");
+				log("case 33 편집 클");
+				solo.sleep(500);
+			}
+
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final ImageButton delete_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.delete_btn);
+			if (delete_bt != null) {	
+				log("case 33 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								delete_bt.callOnClick();
+								log("case 33 delete 버튼 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                solo.takeScreenshot("Field+Test+case" + "33-1" + "+" + testDate);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}			
+			solo.takeScreenshot("Field+Test+case" + "33-2" + "+" + testDate);
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}	
+						
 		}		
 		
 	public void main(String[] args) throws Exception {
