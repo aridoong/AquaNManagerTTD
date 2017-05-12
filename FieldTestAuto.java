@@ -1497,7 +1497,29 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					solo.sleep(2000);
 				}	
 			}			
-		}		
+		}
+		
+//		public void testDownloadSuccesslyPlay(String uri, int caseNumber) {	
+//		//다운로드된 콘텐츠가 정상적으로 재생되는지 
+//			solo = new Solo(getInstrumentation(), getActivity());
+//			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			Context instrumentationContext = getInstrumentation().getContext();
+//			log("Field Test case " + caseNumber + " opened");
+//			instrumentationContext.startActivity(browserIntent);
+//			
+//			if (solo.waitForText("확인")) {
+//				solo.clickOnText("확인");
+//				log("case 27 다운로드 할 때 프로그레스 바 정상적으로 올라가는가 확인.");
+//				solo.sleep(4000);
+//				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+//				
+//				if (solo.waitForText("예")) {
+//					solo.clickOnText("예");
+//					solo.sleep(2000);
+//				}	
+//			}			
+//		}				
 
 		/* 비디오 탭 비디오들 소팅 기능 
 		 * 2017-05-11 
@@ -1840,9 +1862,75 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
                 final Button button_ok = (Button) solo.getView(android.R.id.button1);
                 button_ok.callOnClick();
                 solo.sleep(1000);
-			}	
-						
+			}			
 		}		
+	
+		/* 재생목록 단일 및 전체 재생 
+		 * 재생목록에 있는 콘텐츠 단일 재생 및 전체 재생 가능하도록 함수를 만들기. 
+		 * 2017-05-12 
+		 * jihyepark */
+		
+		public void PlaylistContentPlayOne(int caseNumber) { 
+		//재생 목록에 있는 단일 콘텐츠 재생하기 
+			   solo.waitForActivity("AquaPlaylist", 5000);
+               log("AquaPlaylist wait end");
+               solo.sleep(5000);
+               solo.waitForView(com.cdn.aquanmanager.R.id.playlist);
+               final ImageButton playlistTab_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.playlist);
+               try {
+                          runTestOnUiThread(new Runnable() {
+
+                                     @Override
+                                     public void run() {
+                                               // TODO Auto-generated method stub
+                                               log("playlistTab button click");
+                                               playlistTab_bt.callOnClick();
+                                               log("case playlist playlistTab opened");
+                                               solo.sleep(3000);
+                                     }
+                                    
+                          });
+               } catch(Throwable e) {
+                          e.printStackTrace();
+               }
+               solo.sleep(3000);  ////여기까지가 재생목록 탭으로 이동
+              
+               solo.assertCurrentActivity("message", AquaPlaylist.class);
+               solo.waitForActivity("AquaPlaylist");
+               if (solo.waitForActivity("AquaPlaylist")) {
+                          log("case playlist 플레이리스트 액티비티를 wait 했습니다.");
+                          solo.waitForView(com.cdn.aquanmanager.R.id.edit);
+                          if (solo.waitForView(com.cdn.aquanmanager.R.id.edit)) {                             
+                                     log("case playlist 현재 액티비티는 : " + solo.getCurrentActivity());
+                                    
+                          }
+                          solo.sleep(2000);	
+                          
+                          solo.getCurrentActivity();
+                          solo.assertCurrentActivity("message", AquaPlaylist.class);
+                          
+                          final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+                          if(edit_bt != null){
+                              try{
+	                                 runTestOnUiThread(new Runnable(){
+	                                             @Override
+	                                             public void run() {
+	                                                        // TODO Auto-generated method stub
+	                                                        edit_bt.callOnClick();
+	                                                        log("case playlist 편집 버튼 클릭!!");
+	                                                        solo.sleep(2000);
+	                                             }
+	                                  });
+		                        } catch (Throwable e) {
+		                                  e.printStackTrace();
+		                        }
+                          }
+               }
+		}
+		
+		public void PlaylistContentAllPlay(int caseNumber) {
+		//재생 목록에 있는 콘텐츠 전부 재생하기 	
+		}
 		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();	
