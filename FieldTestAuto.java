@@ -196,7 +196,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testVideoFolderNameSorting(61);
 		//testVideoContentDelete(62);
 		//testVideoFolderDelete(63);
-		PlaylistContentPlayOne(64);
+		PlaylistContentPlayInfo(64);
 
 		solo.waitForActivity("AquaContent", 5000);
 		log("AquaContent wait End");
@@ -1871,9 +1871,9 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 2017-05-12 
 		 * jihyepark */
 		
-		public void PlaylistContentPlayOne(int caseNumber) { 
-		//재생 목록에 있는 단일 콘텐츠 재생하기 
-			   solo.waitForActivity("AquaPlaylist", 3000);
+		public void PlaylistContentPlayInfo(int caseNumber) { 
+		//재생 목록에 있는 단일 콘텐츠 상세정보보기 
+			   solo.waitForActivity("AquaPlaylist", 2000);
                log("case 34 AquaPlaylist wait end");
                solo.sleep(500);
                solo.waitForView(com.cdn.aquanmanager.R.id.playlist);
@@ -1900,8 +1900,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
                           log("case 34 playlist 플레이리스트 액티비티를 wait 했습니다.");
                           solo.waitForView(com.cdn.aquanmanager.R.id.edit);
                           if (solo.waitForView(com.cdn.aquanmanager.R.id.edit)) {                             
-                                     log("case 34 playlist 현재 액티비티는 : " + solo.getCurrentActivity());
-                                    
+                             log("case 34 playlist 현재 액티비티는 : " + solo.getCurrentActivity());
                           }
                           solo.sleep(1000);	      
                }
@@ -1912,31 +1911,38 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
    				log("case 34 기본 재생 목록 클릭.");
    				solo.sleep(500);
    				
-   				//콘텐츠 재생 버튼 클릭하는 구문.
-   				final ImageButton contentplay_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.content_play);
-   				if (contentplay_bt != null) {	
-   					log("case 34 content play 버튼을 찾음.");
-   					try {
-   							runTestOnUiThread(new Runnable() {
-   								@Override
-   								public void run() {
-   									// TODO Auto-generated method stub
-   									contentplay_bt.callOnClick();
-   									log("case 34 content play 버튼 클릭.");
-   									solo.sleep(1000);
-   								}		
-   							});
-   					} catch (Throwable e) {
-   						e.printStackTrace();
-   					}
-   				}
+   	   			if(solo.waitForText("videocontent1")) {
+   	   				solo.clickOnText("videocontent1");
+   	   				log("case 34 1번 비디오 콘텐츠 찾아서 클릭.");
+   	   				solo.sleep(2000);
+   	   				solo.takeScreenshot("Field+Test+case" + "34" + "+" + testDate);
+   	   				solo.sleep(2000);
+   	   			}
    			}		
 		}
 		
-		public void PlaylistContentAllPlay(int caseNumber) {
-		//재생 목록에 있는 콘텐츠 전부 재생하기 	
+		public void PlaylistContentAllPlay(int casenumber){
+		//플레이리스트 목록 전체 재생.
+//			//콘텐츠 재생 버튼 클릭하는 구문.
+//			final ImageButton contentplay_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.content_play);
+//			if (contentplay_bt != null) {	
+//				log("case 34 content play 버튼을 찾음.");
+//				try {
+//						runTestOnUiThread(new Runnable() {
+//							@Override
+//							public void run() {
+//								// TODO Auto-generated method stub
+//								contentplay_bt.callOnClick();
+//								log("case 34 content play 버튼 클릭.");
+//								solo.sleep(1000);
+//							}		
+//						});
+//				} catch (Throwable e) {
+//					e.printStackTrace();
+//				}
+//			}
+			
 		}
-		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();	
 	}
