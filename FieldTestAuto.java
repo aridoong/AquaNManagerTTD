@@ -1681,7 +1681,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			//강의명 정렬 라디오버튼을 클릭하는 구문. 
 			if(solo.waitForText("강의명 정렬")) {
 				solo.clickOnText("강의명 정렬");
-				log("case 31 강의명 정렬된 영상들의 모습을 확인.");
+				log("case 31 원하는 목록대로 편집됨을 확인.");
 				solo.sleep(4000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				solo.sleep(1000);
@@ -1697,7 +1697,17 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		/* 비디오 탭 삭제(편집) 기능 
 		 * 폴더 및 파일 삭제가 자유롭게 가능해야
 		 * 2017-05-12 
-		 * jihyepark */		
+		 * jihyepark */
+		
+		public void testVideoContentDelete(int caseNumber) {
+		//비디오 탭 파일 삭제 기능.
+			
+		}
+		
+		public void testVideoFolderDelete(int caseNumber) {
+		//비디오 탭 폴더 삭제 기능.
+			
+		}		
 		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();	
