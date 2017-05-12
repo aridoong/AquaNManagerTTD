@@ -196,6 +196,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testVideoFolderNameSorting(61);
 		//testVideoContentDelete(62);
 		//testVideoFolderDelete(63);
+		PlaylistContentPlayOne(64);
 
 		solo.waitForActivity("AquaContent", 5000);
 		log("AquaContent wait End");
@@ -1872,60 +1873,64 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		
 		public void PlaylistContentPlayOne(int caseNumber) { 
 		//재생 목록에 있는 단일 콘텐츠 재생하기 
-			   solo.waitForActivity("AquaPlaylist", 5000);
-               log("AquaPlaylist wait end");
-               solo.sleep(5000);
+			   solo.waitForActivity("AquaPlaylist", 3000);
+               log("case 34 AquaPlaylist wait end");
+               solo.sleep(500);
                solo.waitForView(com.cdn.aquanmanager.R.id.playlist);
                final ImageButton playlistTab_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.playlist);
                try {
-                          runTestOnUiThread(new Runnable() {
-
-                                     @Override
-                                     public void run() {
-                                               // TODO Auto-generated method stub
-                                               log("playlistTab button click");
-                                               playlistTab_bt.callOnClick();
-                                               log("case playlist playlistTab opened");
-                                               solo.sleep(3000);
-                                     }
-                                    
-                          });
+                      runTestOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+	                           // TODO Auto-generated method stub
+	                           log("case 34 playlistTab button click");
+	                           playlistTab_bt.callOnClick();
+	                           log("case 34 playlist playlistTab opened");
+	                           solo.sleep(3000);
+                           }        
+                      });
                } catch(Throwable e) {
                           e.printStackTrace();
                }
-               solo.sleep(3000);  ////여기까지가 재생목록 탭으로 이동
+               solo.sleep(1000);  ////여기까지가 재생목록 탭으로 이동
               
                solo.assertCurrentActivity("message", AquaPlaylist.class);
                solo.waitForActivity("AquaPlaylist");
                if (solo.waitForActivity("AquaPlaylist")) {
-                          log("case playlist 플레이리스트 액티비티를 wait 했습니다.");
+                          log("case 34 playlist 플레이리스트 액티비티를 wait 했습니다.");
                           solo.waitForView(com.cdn.aquanmanager.R.id.edit);
                           if (solo.waitForView(com.cdn.aquanmanager.R.id.edit)) {                             
-                                     log("case playlist 현재 액티비티는 : " + solo.getCurrentActivity());
+                                     log("case 34 playlist 현재 액티비티는 : " + solo.getCurrentActivity());
                                     
                           }
-                          solo.sleep(2000);	
-                          
-                          solo.getCurrentActivity();
-                          solo.assertCurrentActivity("message", AquaPlaylist.class);
-                          
-                          final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
-                          if(edit_bt != null){
-                              try{
-	                                 runTestOnUiThread(new Runnable(){
-	                                             @Override
-	                                             public void run() {
-	                                                        // TODO Auto-generated method stub
-	                                                        edit_bt.callOnClick();
-	                                                        log("case playlist 편집 버튼 클릭!!");
-	                                                        solo.sleep(2000);
-	                                             }
-	                                  });
-		                        } catch (Throwable e) {
-		                                  e.printStackTrace();
-		                        }
-                          }
+                          solo.sleep(1000);	      
                }
+               
+            //해당 재생목록으로 들어가기 
+   			if(solo.waitForText("기본 재생 목록")) {
+   				solo.clickOnText("기본 재생 목록");
+   				log("case 34 기본 재생 목록 클릭.");
+   				solo.sleep(500);
+   				
+   				//콘텐츠 재생 버튼 클릭하는 구문.
+   				final ImageButton contentplay_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.content_play);
+   				if (contentplay_bt != null) {	
+   					log("case 34 content play 버튼을 찾음.");
+   					try {
+   							runTestOnUiThread(new Runnable() {
+   								@Override
+   								public void run() {
+   									// TODO Auto-generated method stub
+   									contentplay_bt.callOnClick();
+   									log("case 34 content play 버튼 클릭.");
+   									solo.sleep(1000);
+   								}		
+   							});
+   					} catch (Throwable e) {
+   						e.printStackTrace();
+   					}
+   				}
+   			}		
 		}
 		
 		public void PlaylistContentAllPlay(int caseNumber) {
