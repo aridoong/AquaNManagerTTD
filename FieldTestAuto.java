@@ -196,7 +196,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testVideoFolderNameSorting(61);
 		//testVideoContentDelete(62);
 		//testVideoFolderDelete(63);
-		PlaylistContentPlayInfo(64);
+		testPlaylistContentPlayInfo(64);
+		testPlaylistContentPlay(65);
 
 		solo.waitForActivity("AquaContent", 5000);
 		log("AquaContent wait End");
@@ -1871,7 +1872,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 2017-05-12 
 		 * jihyepark */
 		
-		public void PlaylistContentPlayInfo(int caseNumber) { 
+		public void testPlaylistContentPlayInfo(int caseNumber) { 
 		//재생 목록에 있는 단일 콘텐츠 상세정보보기 
 			   solo.waitForActivity("AquaPlaylist", 2000);
                log("case 34 AquaPlaylist wait end");
@@ -1921,28 +1922,37 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
    			}		
 		}
 		
-		public void PlaylistContentAllPlay(int casenumber){
-		//플레이리스트 목록 전체 재생.
-//			//콘텐츠 재생 버튼 클릭하는 구문.
-//			final ImageButton contentplay_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.content_play);
-//			if (contentplay_bt != null) {	
-//				log("case 34 content play 버튼을 찾음.");
-//				try {
-//						runTestOnUiThread(new Runnable() {
-//							@Override
-//							public void run() {
-//								// TODO Auto-generated method stub
-//								contentplay_bt.callOnClick();
-//								log("case 34 content play 버튼 클릭.");
-//								solo.sleep(1000);
-//							}		
-//						});
-//				} catch (Throwable e) {
-//					e.printStackTrace();
-//				}
-//			}
+		public void testPlaylistContentPlay(int caseNumber) { 
+			//재생 목록에 있는 단일 콘텐츠 재생하기 
 			
-		}
+					//먼저 video tab을 진입한다.
+					solo.sleep(2000);
+		
+					if(solo.waitForText("뒤로")) {
+						solo.clickOnText("뒤로");
+						solo.sleep(2000);
+						log("case 35 뒤로 버튼을 클릭.");
+					}		
+	   			
+				//콘텐츠 재생 버튼 클릭하는 구문.
+				final ImageButton contentplay_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.content_play);
+				if (contentplay_bt != null) {	
+					log("case 34 content play 버튼을 찾음.");
+					try {
+							runTestOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									contentplay_bt.callOnClick();
+									log("case 34 content play 버튼 클릭.");
+									solo.sleep(1000);
+								}		
+							});
+					} catch (Throwable e) {
+						e.printStackTrace();
+					}
+				}
+			}		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();	
 	}
