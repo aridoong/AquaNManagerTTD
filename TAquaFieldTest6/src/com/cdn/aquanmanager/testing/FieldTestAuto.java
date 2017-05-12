@@ -23,6 +23,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -176,10 +177,13 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		 * 여기서부터 >>, <<, || 아이콘 관련 Test 를 진행합니다. case number : 없음 ( iconClick )
 		 */		
 		//testIconClick("http://" + serverIp + "/media/auto/player5.asp", "iconClick");
-		
 
-		//잠깐 플레이리스트 관련 Test 를 진행합니다.
-		//testPlaylist("playlist");
+		/*
+		 * 
+		 * 여기서부터 재생목록 생성 관련 Test 를 진행합니다.
+		 */
+//		testNewPlaylist("new playlist");
+		testEditPlaylist("edit playlist");
 		
 		//현재 불가 testwatermarkText("http://" + serverIp + "/media/auto/wm_text.asp", 49);	
 		//testwatermarkImage("http://" + serverIp + "/media/auto/wm_image.asp", 50);
@@ -190,10 +194,14 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		//testStreamingContentsPlay("http://" + serverIp + "/media/auto/player2.asp", 55);
 		//testStreamingContentsNoReplay("http://" + serverIp + "/media/auto/player2.asp", 56);
 		//testDownloadProgressBar("http://" + serverIp + "/media/auto/download2.asp", 57);
-		testVideoUserNameSorting(58);
-		testVideoContentNameSorting(59);
-		testVideoFolderUserSorting(60);
-		testVideoFolderNameSorting(61);
+		//testVideoUserNameSorting(58);
+		//testVideoContentNameSorting(59);
+		//testVideoFolderUserSorting(60);
+		//testVideoFolderNameSorting(61);
+		//testVideoContentDelete(62);
+		//testVideoFolderDelete(63);
+		testPlaylistContentPlayInfo(64);
+		testPlaylistContentPlay(65);
 
 		solo.waitForActivity("AquaContent", 5000);
 		log("AquaContent wait End");
@@ -1113,7 +1121,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		solo.goBack();
 	}
 	
-	public void testPlaylist(String caseNumber) {
+	public void testNewPlaylist(String caseNumber) {
+		final String caseNum = caseNumber;
 		solo.waitForActivity("AquaPlaylist", 5000);
 		log("AquaPlaylist wait end");
 		solo.sleep(5000);
@@ -1125,9 +1134,8 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					log("playlistTab button click");
 					playlistTab_bt.callOnClick();
-					log("case playlist playlistTab opened");
+					log("case " + caseNum + " playlistTab opened");
 					solo.sleep(3000);
 				}
 				
@@ -1140,30 +1148,21 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		solo.assertCurrentActivity("message", AquaPlaylist.class);
 		solo.waitForActivity("AquaPlaylist");
 		if (solo.waitForActivity("AquaPlaylist")) {
-			log("case playlist 플레이리스트 액티비티를 wait 했습니다.");
-			
 			solo.waitForView(com.cdn.aquanmanager.R.id.edit);
-			if (solo.waitForView(com.cdn.aquanmanager.R.id.edit)) {			
-				log("case playlist 편집 버튼 찾았음!!");
-			}
 			solo.sleep(2000);
-			
 			solo.getCurrentActivity();
 			solo.assertCurrentActivity("message", AquaPlaylist.class);
-			
 			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
 			if (edit_bt != null) {			
 				try {
-					runTestOnUiThread(new Runnable() {
-						
+					runTestOnUiThread(new Runnable() {						
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
 							edit_bt.callOnClick();
-							log("case playlist 편집 버튼 클릭!!");
+							log("case " + caseNum + " edit 버튼 클릭");
 							solo.sleep(2000);
 						}
-						
 					});
 				} catch (Throwable e) {
 					e.printStackTrace();
@@ -1174,17 +1173,146 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.clickOnText("새 재생목록");
 				solo.sleep(2000);
 			}
-			solo.sleep(20000);
-			
+			solo.sleep(4000);
 		}
 		
+		if(solo.waitForView(com.cdn.aquanmanager.R.id.playListName)) {
+			log("case " + caseNum + " 이름 입력칸을 찾음");
+			final EditText plname_et = (EditText)solo.getView(com.cdn.aquanmanager.R.id.playListName);
+			solo.typeText(plname_et, "new  ~!@#$%^&*()_+=-`1029384756");
+			solo.sleep(8000);
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "_1" + testDate);
+			if(solo.waitForText("예")) {
+				solo.clickOnText("예");
+				solo.sleep(2000);
+			}
+			solo.takeScreenshot("Field+Test+case+" + caseNumber + "_2" + testDate);
+		}
 		
+		solo.sleep(3000);
+		final Button edit_bt2 = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+		if (edit_bt2 != null) {			
+			try {
+				runTestOnUiThread(new Runnable() {						
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						edit_bt2.callOnClick();
+						log("case " + caseNum + " edit 버튼 클릭");
+						solo.sleep(2000);
+					}
+				});
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(solo.waitForText("새 재생목록")) {
+			solo.clickOnText("새 재생목록");
+			solo.sleep(2000);
+		}
+		solo.sleep(4000);
 		
-		//이제 여기서부터, 로보티움을 이용해 자판을 칠 수 있나......?
-		//아니면 입력칸에다가 내가 직접 코드 상으로 재생목록의 이름 "!@34한국어eng" 을 넣을 수 있을까?
+		if(solo.waitForView(com.cdn.aquanmanager.R.id.playListName)) {
+			log("case " + caseNum + " 이름 입력칸을 찾음");
+			final EditText plname_et = (EditText)solo.getView(com.cdn.aquanmanager.R.id.playListName);
+			solo.typeText(plname_et, "new  ~!@#$%^&*()_+=-`1029384756");
+			solo.sleep(8000);
+			if(solo.waitForText("예")) {
+				solo.clickOnText("예");
+				solo.sleep(2000);
+			}
+			if(solo.waitForText("확인")) {
+				solo.takeScreenshot("Field+Test+case+" + caseNumber + "_3" + testDate);	//기존 재생목록과 이름이 동일한 경우 생성되지 않음을 보여주는 캡쳐
+				solo.clickOnText("확인");
+				solo.sleep(2000);
+			}
+		}
+	}
+	
+	public void testEditPlaylist(String caseNumber) {
+		final String caseNum = caseNumber;
+		solo.waitForActivity("AquaPlaylist", 5000);
+		log("AquaPlaylist wait end");
+		solo.sleep(5000);
+		solo.waitForView(com.cdn.aquanmanager.R.id.playlist);
+		final ImageButton playlistTab_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.playlist);
+		try {
+			runTestOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					playlistTab_bt.callOnClick();
+					log("case " + caseNum + " playlistTab opened");
+					solo.sleep(3000);
+				}
+				
+			});
+		} catch(Throwable e) {
+			e.printStackTrace();
+		}
+		solo.sleep(3000);
+		
+		solo.assertCurrentActivity("message", AquaPlaylist.class);
+		solo.waitForActivity("AquaPlaylist");
+		if (solo.waitForActivity("AquaPlaylist")) {
+			solo.waitForView(com.cdn.aquanmanager.R.id.edit);
+			solo.sleep(2000);
+			solo.getCurrentActivity();
+			solo.assertCurrentActivity("message", AquaPlaylist.class);
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {			
+				try {
+					runTestOnUiThread(new Runnable() {						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							edit_bt.callOnClick();
+							log("case " + caseNum + " edit 버튼 클릭");
+							solo.sleep(2000);
+						}
+					});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+
+			if(solo.waitForText("편집")) {
+				solo.clickOnText("편집");
+				solo.sleep(2000);
+				
+				if(solo.waitForText("기본 재생 목록")) {
+					solo.clickLongOnText("기본 재생 목록", 1, 5000);
+					solo.sleep(2000);
+					
+					if(solo.waitForView(com.cdn.aquanmanager.R.id.playListName)) {
+						log("case " + caseNum + " 이름 입력칸을 찾음");
+						final EditText plname_et = (EditText)solo.getView(com.cdn.aquanmanager.R.id.playListName);
+						solo.typeText(plname_et, "{[changed name;':/?|]}");
+						solo.sleep(8000);
+						solo.takeScreenshot("Field+Test+case+" + caseNumber + "_1" + testDate);
+						if(solo.waitForText("예")) {
+							solo.clickOnText("예");
+							solo.sleep(2000);
+						}						
+						solo.goBack();
+						solo.sleep(2000);
+						solo.takeScreenshot("Field+Test+case+" + caseNumber + "_2" + testDate);
+					}				
+					
+					
+				}
+			}
+			solo.sleep(4000);
+		}
 		
 		solo.sleep(2000);
 	}
+	
+		/* 워터마크의 텍스트 및 이미지화 그리고 기타 옵션을 주었을 때 잘 적용되는지 테스트하는 함수 (현재 워터마크 이미지만 가능하고 텍스트에서 process crushed가 남 
+		 * 2017-05-10
+		 * jihyepark */			
 	
 		public void testwatermarkText(String uri, int caseNumber) {
 		//화면에 여러 문자들이 들어있어도 텍스트가 잘 나오는지 확인 케이스(오류남)		
@@ -1246,6 +1374,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 		}	
 		
+		/* 재생화면에 있는 X표시를 통해 재생화면 종료가 가능한지 여부를 판단. 
+		 * 2017-05-10
+		 * jihyepark */			
+		
 		public void testclosebutton(String uri, int caseNumber) {
 		//재생화면 종료 버튼클릭하기 
 			solo = new Solo(getInstrumentation(), getActivity());
@@ -1284,6 +1416,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}
 
 		}
+	
+		/* 팝업플레이 버튼 실행 및 그 안에 있는 여러 버튼을 누르는동작들 (현재 되지 않음) 
+		 * 2017-05-11 
+		 * jihyepark */			
 		
 		public void testPopUpPlaybutton(String uri, int caseNumber) {
 		//팝업창 띄우는 버튼 클릭하기 
@@ -1379,7 +1515,12 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 				solo.sleep(3000);
 			}
 
-		}		
+		}	
+		
+		
+		/* 스트리밍 콘텐츠의 재생 유무 (기본 재생 및 다시 재생해도 이어보기가 되지 않는가 확인.)	
+		 * 2017-05-11 
+		 * jihyepark */			
 	
 		public void testStreamingContentsPlay(String uri, int caseNumber) {
 		//스트리밍 콘텐츠 정상 재생확인하기 
@@ -1457,8 +1598,11 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			}			
 		}
 		
-		public void testDownloadProgressBar(String uri, int caseNumber) {
-		//다운로드할 때 게이지바나 파일명 등이 정확하게 나오는지 확인.			
+		/* 다운로드할 때 게이지바나 파일명 등이 정확하게 나오는지 확인.	
+		 * 2017-05-11 
+		 * jihyepark */				
+		
+		public void testDownloadProgressBar(String uri, int caseNumber) {		
 			solo = new Solo(getInstrumentation(), getActivity());
 			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1477,8 +1621,34 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 					solo.sleep(2000);
 				}	
 			}			
-		}		
+		}
+		
+//		public void testDownloadSuccesslyPlay(String uri, int caseNumber) {	
+//		//다운로드된 콘텐츠가 정상적으로 재생되는지 
+//			solo = new Solo(getInstrumentation(), getActivity());
+//			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//			browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			Context instrumentationContext = getInstrumentation().getContext();
+//			log("Field Test case " + caseNumber + " opened");
+//			instrumentationContext.startActivity(browserIntent);
+//			
+//			if (solo.waitForText("확인")) {
+//				solo.clickOnText("확인");
+//				log("case 27 다운로드 할 때 프로그레스 바 정상적으로 올라가는가 확인.");
+//				solo.sleep(4000);
+//				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
+//				
+//				if (solo.waitForText("예")) {
+//					solo.clickOnText("예");
+//					solo.sleep(2000);
+//				}	
+//			}			
+//		}				
 
+		/* 비디오 탭 비디오들 소팅 기능 
+		 * 2017-05-11 
+		 * jihyepark */		
+		
 		public void testVideoUserNameSorting(int caseNumber) {
 		//비디오탭 사용자정렬 기능. 
 			
@@ -1578,18 +1748,21 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
           }
 		}	
 		
+		/* 비디오 탭 폴더 소팅 기능
+		 * 앞에 비디오 파일 소팅 함수를 실행하고서 실행해야함! 
+		 * 2017-05-12 
+		 * jihyepark */
+		
 		public void testVideoFolderUserSorting(int caseNumber) {
 		//비디오탭 폴더 사용자정렬 기능. 
 			
 			//먼저 video tab을 진입한다.
 			solo.sleep(2000);
-			solo.waitForActivity("AquaContent", 5000);
-			log("case 28 AquaContent wait end");
-			
-			solo.sleep(3000);
-			if(solo.waitForText("jihyetest")) {
-				solo.clickOnText("jihyetest");
+
+			if(solo.waitForText("뒤로")) {
+				solo.clickOnText("뒤로");
 				solo.sleep(2000);
+				log("case 30 뒤로 버튼을 클릭.");
 			}
 			
 			//편집 버튼을 찾아서 클릭하는 구문.
@@ -1622,11 +1795,10 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 		}		
 
 		public void testVideoFolderNameSorting(int caseNumber) {
-		//비디오탭 폴더 폴더정렬 기능. 
+		//비디오탭 폴더 강의명정렬 기능. 
 			
 			//먼저 video tab을 진입한다.
 			solo.sleep(2000);
-			solo.waitForActivity("AquaContent", 2000);
 			log("case 31 AquaContent wait end");
 			
 			solo.sleep(1000);
@@ -1657,7 +1829,7 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
 			//강의명 정렬 라디오버튼을 클릭하는 구문. 
 			if(solo.waitForText("강의명 정렬")) {
 				solo.clickOnText("강의명 정렬");
-				log("case 31 강의명 정렬된 영상들의 모습을 확인.");
+				log("case 31 원하는 목록대로 편집됨을 확인.");
 				solo.sleep(4000);
 				solo.takeScreenshot("Field+Test+case" + caseNumber + "+" + testDate);
 				solo.sleep(1000);
@@ -1668,8 +1840,241 @@ public class FieldTestAuto extends ActivityInstrumentationTestCase2<AquaLauncher
                 button_ok.callOnClick();
                 solo.sleep(1000);
 			}			
-		}				
+		}
 		
+		/* 비디오 탭 삭제(편집) 기능 
+		 * 폴더 및 파일 삭제가 자유롭게 가능해야
+		 * 2017-05-12 
+		 * jihyepark */
+		
+		public void testVideoContentDelete(int caseNumber) {
+		//비디오 탭 파일 삭제 기능.
+			//먼저 video tab을 진입한다.
+			
+			solo.sleep(2000);
+			solo.waitForActivity("AquaContent", 5000);
+			log("case 32 AquaContent wait end");
+			
+			solo.sleep(3000);
+			if(solo.waitForText("jihyetest")) {
+				solo.clickOnText("jihyetest");
+				solo.sleep(2000);
+			}
+			if(solo.waitForText("crs2")) {
+				solo.clickOnText("crs2");
+				solo.sleep(2000);
+			}
+			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 32 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 32 edit 버튼을 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			//강의명 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("편집")) {
+				solo.clickOnText("편집");
+				log("case 32 편집 클");
+				solo.sleep(500);
+			}
+
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final ImageButton delete_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.delete_btn);
+			if (delete_bt != null) {	
+				log("case 32 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								delete_bt.callOnClick();
+								log("case 32 delete 버튼 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                solo.takeScreenshot("Field+Test+case" + "32-1" + "+" + testDate);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}			
+			solo.takeScreenshot("Field+Test+case" + "32-2" + "+" + testDate);
+			
+		}
+		
+		public void testVideoFolderDelete(int caseNumber) {
+		//비디오 탭 폴더 삭제 기능.
+			solo.sleep(2000);
+
+			if(solo.waitForText("뒤로")) {
+				solo.clickOnText("뒤로");
+				solo.sleep(2000);
+				log("case 33 뒤로 버튼을 클릭.");
+			}
+			
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final Button edit_bt = (Button)solo.getView(com.cdn.aquanmanager.R.id.edit);
+			if (edit_bt != null) {	
+				log("case 33 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								edit_bt.callOnClick();
+								log("case 33 edit 버튼을 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			//강의명 정렬 라디오버튼을 클릭하는 구문. 
+			if(solo.waitForText("편집")) {
+				solo.clickOnText("편집");
+				log("case 33 편집 클");
+				solo.sleep(500);
+			}
+
+			//편집 버튼을 찾아서 클릭하는 구문.
+			final ImageButton delete_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.delete_btn);
+			if (delete_bt != null) {	
+				log("case 33 edit 버튼을 찾음.");
+				try {
+						runTestOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								delete_bt.callOnClick();
+								log("case 33 delete 버튼 클릭.");
+								solo.sleep(2000);
+							}		
+						});
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                solo.takeScreenshot("Field+Test+case" + "33-1" + "+" + testDate);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}			
+			solo.takeScreenshot("Field+Test+case" + "33-2" + "+" + testDate);
+			
+			if (solo.waitForView(android.R.id.button1, 1, 2000)) {
+                final Button button_ok = (Button) solo.getView(android.R.id.button1);
+                button_ok.callOnClick();
+                solo.sleep(1000);
+			}			
+		}		
+	
+		/* 재생목록 단일 및 전체 재생 
+		 * 재생목록에 있는 콘텐츠 단일 재생 및 전체 재생 가능하도록 함수를 만들기. 
+		 * 2017-05-12 
+		 * jihyepark */
+		
+		public void testPlaylistContentPlayInfo(int caseNumber) { 
+		//재생 목록에 있는 단일 콘텐츠 상세정보보기 
+			   solo.waitForActivity("AquaPlaylist", 2000);
+               log("case 34 AquaPlaylist wait end");
+               solo.sleep(500);
+               solo.waitForView(com.cdn.aquanmanager.R.id.playlist);
+               final ImageButton playlistTab_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.playlist);
+               try {
+                      runTestOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+	                           // TODO Auto-generated method stub
+	                           log("case 34 playlistTab button click");
+	                           playlistTab_bt.callOnClick();
+	                           log("case 34 playlist playlistTab opened");
+	                           solo.sleep(3000);
+                           }        
+                      });
+               } catch(Throwable e) {
+                          e.printStackTrace();
+               }
+               solo.sleep(1000);  ////여기까지가 재생목록 탭으로 이동
+              
+               solo.assertCurrentActivity("message", AquaPlaylist.class);
+               solo.waitForActivity("AquaPlaylist");
+               if (solo.waitForActivity("AquaPlaylist")) {
+                          log("case 34 playlist 플레이리스트 액티비티를 wait 했습니다.");
+                          solo.waitForView(com.cdn.aquanmanager.R.id.edit);
+                          if (solo.waitForView(com.cdn.aquanmanager.R.id.edit)) {                             
+                             log("case 34 playlist 현재 액티비티는 : " + solo.getCurrentActivity());
+                          }
+                          solo.sleep(1000);	      
+               }
+               
+            //해당 재생목록으로 들어가기 
+   			if(solo.waitForText("기본 재생 목록")) {
+   				solo.clickOnText("기본 재생 목록");
+   				log("case 34 기본 재생 목록 클릭.");
+   				solo.sleep(500);
+   				
+   	   			if(solo.waitForText("videocontent1")) {
+   	   				solo.clickOnText("videocontent1");
+   	   				log("case 34 1번 비디오 콘텐츠 찾아서 클릭.");
+   	   				solo.sleep(2000);
+   	   				solo.takeScreenshot("Field+Test+case" + "34" + "+" + testDate);
+   	   				solo.sleep(2000);
+   	   			}
+   			}		
+		}
+		
+		public void testPlaylistContentPlay(int caseNumber) { 
+			//재생 목록에 있는 단일 콘텐츠 재생하기 
+			
+					//먼저 video tab을 진입한다.
+					solo.sleep(2000);
+		
+					if(solo.waitForText("뒤로")) {
+						solo.clickOnText("뒤로");
+						solo.sleep(2000);
+						log("case 35 뒤로 버튼을 클릭.");
+					}		
+	   			
+				//콘텐츠 재생 버튼 클릭하는 구문.
+				final ImageButton contentplay_bt = (ImageButton)solo.getView(com.cdn.aquanmanager.R.id.content_play);
+				if (contentplay_bt != null) {	
+					log("case 34 content play 버튼을 찾음.");
+					try {
+							runTestOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									contentplay_bt.callOnClick();
+									log("case 34 content play 버튼 클릭.");
+									solo.sleep(1000);
+								}		
+							});
+					} catch (Throwable e) {
+						e.printStackTrace();
+					}
+				}
+			}		
 	public void main(String[] args) throws Exception {
 		testPlayerTest_1();	
 	}
